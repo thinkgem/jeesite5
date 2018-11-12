@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨域请求</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.ajax({type: "GET",url:"http://localhost:8980/js/test",success:function(result){
+                    console.info(result)
+                        $("#p1").html(result);
+                    },error:function (XMLHttpRequest, textStatus, errorThrown,result) {
+                                       alert(XMLHttpRequest.status);
+                                       alert(XMLHttpRequest.readyState);
+                                       alert(textStatus);
+                                       alert(result);
+                    }});
+            });
+        });
+    </script>
+</head>
+<body>
+
+<p width="500px" height="100px" id="p1"></p>
+<button>获取其他内容</button>
+</body>
+</html>

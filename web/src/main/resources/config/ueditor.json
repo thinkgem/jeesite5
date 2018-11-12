@@ -7,7 +7,7 @@
     "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 上传图片格式显示 */
     "imageCompressEnable": true, /* 是否压缩图片,默认是true */
     "imageCompressBorder": 800, /* 图片压缩最大宽度限制 */
-    "imageInsertAlign": "none", /* 插入的图片浮动方式 */
+    "imageInsertAlign": "center", /*插入图片默认的浮动方式，原值为none，wallimn*/
     "imageUrlPrefix": "", /* 图片访问路径前缀 */
     "imagePathFormat": "/userfiles/{userid}/images/{yyyy}{mm}{dd}/{filename}_${time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
                                 /* {filename} 会替换成原文件名,配置这项需要注意中文乱码问题 */
