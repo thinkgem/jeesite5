@@ -24,7 +24,7 @@
                                 /* 具请体看线上文档: fex.baidu.com/ueditor/#use-format_upload_filename */
 
     /* 涂鸦图片上传配置项 */
-    "scrawlActionName": "uploadscrawl", /* 执行上传涂鸦的action名称 */
+    "scrawlActionName": "uploadscrawl", /* 执行上传涂鸦的action名称ddf */
     "scrawlFieldName": "upfile", /* 提交的图片表单名称 */
     "scrawlPathFormat": "/userfiles/{userid}/images/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
     "scrawlMaxSize": 2048000, /* 上传大小限制，单位B */

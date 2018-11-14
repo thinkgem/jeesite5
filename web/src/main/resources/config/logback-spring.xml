@@ -17,7 +17,7 @@
 		</encoder>
 	</appender>
 
-	<!-- Log file debug output -->
+	<!-- Log file debug output dsf-->
 	<appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${log.path}/debug.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
