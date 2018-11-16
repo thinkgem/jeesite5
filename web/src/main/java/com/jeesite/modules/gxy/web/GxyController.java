@@ -1,6 +1,7 @@
 package com.jeesite.modules.gxy.web;
 
 import com.jeesite.common.web.BaseController;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "${frontPath}/gxy")
 public class GxyController extends BaseController {
+
+    private static final Logger log = Logger.getLogger(GxyController.class);
 
     @RequestMapping(value = "index")
     public String form() {
