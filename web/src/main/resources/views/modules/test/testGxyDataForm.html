@@ -1,11 +1,4 @@
 <% layout('/layouts/default.html', {title: 'test_gxy_data管理', libs: ['validate','fileupload']}){ %>
-<script type="text/plain" id="myEditor"></script>
-<script type="text/javascript">
-    var editor = UE.getEditor('myEditor', {
-        initialFrameWidth: 800,
-        initialFrameHeight: 300,
-    });
-</script>
 <div class="main-content">
 	<div class="box box-main">
 		<div class="box-header with-border">
@@ -25,9 +18,9 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('名称')}：<i class="fa icon-question hide"></i></label>
+								<span class="required ">*</span> ${text('name')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
-								<#form:input path="name" maxlength="255" class="form-control"/>
+								<#form:input path="name" maxlength="255" class="form-control required"/>
 							</div>
 						</div>
 					</div>
@@ -36,36 +29,14 @@
 					<div class="col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('日期')}：<i class="fa icon-question hide"></i></label>
+								<span class="required ">*</span> ${text('creat_date')}：<i class="fa icon-question hide"></i></label>
 							<div class="col-sm-5">
-								<#form:input path="creatDate" readonly="true" maxlength="20" class="form-control Wdate date"
+								<#form:input path="creatDate" readonly="true" maxlength="20" class="form-control Wdate required date"
 									dataFormat="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!--<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('图片')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-5">
-								<#form:input path="image" maxlength="255" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2" title="">
-								<span class="required hide">*</span> ${text('附件')}：<i class="fa icon-question hide"></i></label>
-							<div class="col-sm-5">
-								<#form:input path="file" maxlength="255" class="form-control"/>
-							</div>
-						</div>
-					</div>
-				</div>-->
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="form-group">
@@ -73,16 +44,6 @@
 							<div class="col-sm-10">
 								<#form:fileupload id="uploadImage" bizKey="${testGxyData.id}" bizType="testGxyData_image"
 									uploadType="image" class="" readonly="false"/>
-							</div>
-						</div>
-					</div>
-				</div><div class="row">
-					<div class="col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-sm-2">${text('图片上传')}：</label>
-							<div class="col-sm-10">
-								<#form:ueditor name="text" maxlength="10000" height="200" class="required"
-								simpleToolbars="false" readonly="false" outline="false"/>
 							</div>
 						</div>
 					</div>

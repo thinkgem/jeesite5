@@ -10,7 +10,7 @@ import com.jeesite.modules.test.entity.TestGxyData;
 /**
  * test_gxy_dataDAO接口
  * @author gxy
- * @version 2018-10-31
+ * @version 2018-11-22
  */
 @MyBatisDao
 public interface TestGxyDataDao extends CrudDao<TestGxyData> {
