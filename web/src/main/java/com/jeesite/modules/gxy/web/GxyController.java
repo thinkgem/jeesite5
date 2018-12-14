@@ -21,6 +21,10 @@ public class GxyController extends BaseController {
         return "gxy/gxyindex";
     }
 
+    @RequestMapping(value = "webgl")
+    public String webgl() {
+        return "gxy/webgl";
+    }
     @RequestMapping(value = "hello")
     public String hello() {
         return "hello";

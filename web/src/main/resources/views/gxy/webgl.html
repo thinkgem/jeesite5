@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas width="400" height="400" id="myCanvas">不支持Canvas</canvas>
+</body>
+<script>
+    main();
+    // WebGL主程序部分
+    function main() {
+        // ---- Canvas ----
+        // 获取canvas节点
+        let canvas = document.querySelector('#myCanvas');
+        // 获取canvas上下文
+        let gl = canvas.getContext('webgl');
+        // ----GLSL程序部分----
+        // Vertex Shader（顶点着色器）
+        const vertex_source = `
+        void main() {
+           gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+           gl_PointSize = 10.0;
+        }
+    `
+        // Fragment Shader（片元着色器）
+        const fragment_source = `
+        void main() {
+          gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+        }
+    `
+        // ----WebGL API调用部分----
+        program = initProgram(gl, vertex_source, fragment_source);
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.drawArrays(gl.Point, 0, 1.0);
+    }
+
+    // 辅助方法：初始化着色器程序
+    function initProgram(gl, vsource, fsource) {
+        let vShader = initShader(gl, gl.VERTEX_SHADER, vsource);
+        let fShader = initShader(gl, gl.FRAGMENT_SHADER, fsource);
+        // 创建WebGL程序
+        let program = gl.createProgram();
+        gl.attachShader(program, vShader);
+        gl.attachShader(program, fShader);
+        gl.linkProgram(program);
+        // 判断是否创建成功
+        if(!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            alert('unable to initialize!');
+            return;
+        }
+        gl.useProgram(program);
+        return program;
+    }
+    // 辅助方法：初始化着色器
+    function initShader(gl, type, source) {
+        let shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            alert('error occured compiling the shaders:' + gl.getShaderInfoLog(shader));
+            return null;
+        }
+        return shader;
+    }
+</script>
+</html>
