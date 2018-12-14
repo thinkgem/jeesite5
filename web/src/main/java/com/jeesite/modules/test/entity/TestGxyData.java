@@ -3,11 +3,13 @@
  */
 package com.jeesite.modules.test.entity;
 
+import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 import java.util.Date;
 import com.jeesite.common.mybatis.annotation.JoinTable;
 import com.jeesite.common.mybatis.annotation.JoinTable.Type;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.validation.constraints.NotNull;
 
 import com.jeesite.common.entity.DataEntity;
 import com.jeesite.common.mybatis.annotation.Column;
@@ -17,7 +19,7 @@ import com.jeesite.common.mybatis.mapper.query.QueryType;
 /**
  * test_gxy_dataEntity
  * @author gxy
- * @version 2018-10-31
+ * @version 2018-11-22
  */
 @Table(name="test_gxy_data", alias="a", columns={
 		@Column(name="id", attrName="id", label="id", isPK=true),
@@ -43,6 +45,7 @@ public class TestGxyData extends DataEntity<TestGxyData> {
 		super(id);
 	}
 	
+	@NotBlank(message="name不能为空")
 	@Length(min=0, max=255, message="name长度不能超过 255 个字符")
 	public String getName() {
 		return name;
@@ -53,6 +56,7 @@ public class TestGxyData extends DataEntity<TestGxyData> {
 	}
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@NotNull(message="creat_date不能为空")
 	public Date getCreatDate() {
 		return creatDate;
 	}

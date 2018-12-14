@@ -44,10 +44,10 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text('名称')}', name:'name', index:'a.name', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+		{header:'${text('name')}', name:'name', index:'a.name', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
 			return '<a href="${ctx}/test/testGxyData/form?id='+row.id+'" class="btnList" data-title="${text('编辑test_gxy_data')}">'+(val||row.id)+'</a>';
 		}},
-		{header:'${text('时期')}', name:'creatDate', index:'a.creat_date', width:150, align:"center"},
+		{header:'${text('creat_date')}', name:'creatDate', index:'a.creat_date', width:150, align:"center"},
 		{header:'${text('图片')}', name:'image', index:'a.image', width:150, align:"left"},
 		{header:'${text('操作')}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
 			var actions = [];
