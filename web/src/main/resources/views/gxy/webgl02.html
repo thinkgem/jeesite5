@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="${ctxStatic}/webgl/Three.js?${_version}"></script>
+    <script src="${ctxStatic}/webgl/Detector.js?${_version}"></script>
+    <script src="${ctxStatic}/webgl/gamepad_uncompressed.js?${_version}"></script>
+    <script src="${ctxStatic}/webgl/OrbitControls.js?${_version}"></script>
+    <script src="${ctxStatic}/webgl/Stats.js?${_version}"></script>
+    <script src="${ctxStatic}/webgl/THREEx.FullScreen.js?${_version}"></script>
+    <script src="${ctxStatic}/webgl/THREEx.KeyboardState.js?${_version}"></script>
+    <script src="${ctxStatic}/webgl/THREEx.WindowResize.js?${_version}"></script>
+
+</head>
+<body>
+<div id="ThreeJS"
+     style="z-index: 1; position: absolute; left: 0px; top: 0px"></div> <!--这个div就是整个画布 -->
+<script>
+    //////////
+    // MAIN //
+    //////////
+    // standard global variables
+    var container, scene, camera, renderer, controls, stats; <!-- 几个变量代表的含义：容器、场景、摄像机（视角）、渲染器、控制装置 -->
+    var keyboard = new THREEx.KeyboardState();
+    var clock = new THREE.Clock();
+
+    // custom global variables
+    var cube;
+
+    // initialization
+    init();
+
+    // animation loop / game loop
+    animate();
+
+    ///////////////
+    // FUNCTIONS //
+    ///////////////
+
+    function init() { <!-- 初始化 -->
+        ///////////
+        // SCENE //
+        ///////////
+        scene = new THREE.Scene(); <!-- 定义场景 -->
+
+        ////////////
+        // CAMERA //
+        ////////////
+
+        // set the view size in pixels (custom or according to window size)
+        // var SCREEN_WIDTH = 400, SCREEN_HEIGHT = 300;
+        var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+        // camera attributes
+        var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+        // set up camera
+        camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR); <!-- 定义视角 -->
+        // add the camera to the scene
+        scene.add(camera);
+        // the camera defaults to position (0,0,0)
+        // so pull it back (z = 400) and up (y = 100) and set the angle towards the scene origin
+        camera.position.set(-400, 150, 200); <!--视角的位置 -->
+        camera.lookAt(scene.position);
+
+        //////////////
+        // RENDERER //
+        //////////////
+
+        // create and start the renderer; choose antialias setting.
+        if (Detector.webgl)
+            renderer = new THREE.WebGLRenderer({
+                antialias : true
+            });
+        else
+            renderer = new THREE.CanvasRenderer();
+
+        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        // attach div element to variable to contain the renderer
+        container = document.getElementById('ThreeJS');
+        // alternatively: to create the div at runtime, use:
+        // container = document.createElement( 'div' );
+        // document.body.appendChild( container );
+
+        // attach renderer to the container div
+        container.appendChild(renderer.domElement);
+
+        ////////////
+        // EVENTS //
+        ////////////
+
+        // automatically resize renderer
+        THREEx.WindowResize(renderer, camera);
+        // toggle full-screen on given key press
+        THREEx.FullScreen.bindKey({
+            charCode : 'm'.charCodeAt(0)
+        });
+
+        //////////////
+        // CONTROLS //
+        //////////////
+
+        // move mouse and: left   click to rotate,
+        //                 middle click to zoom,
+        //                 right  click to pan
+        controls = new THREE.OrbitControls(camera, renderer.domElement); <!-- 设置控制，这里只有鼠标操作 -->
+
+        ///////////
+        // STATS //
+        ///////////
+
+        // displays current and past frames per second attained by scene
+        stats = new Stats();
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.bottom = '0px';
+        stats.domElement.style.zIndex = 100;
+        container.appendChild(stats.domElement);
+
+        ///////////
+        // LIGHT //
+        ///////////
+
+        // create a light
+        var light = new THREE.PointLight(0xffffff); <!-- 设置光源 -->
+        light.position.set(0, 250, 0);
+        scene.add(light);
+
+        // CUBE
+        var cubeGeometry = new THREE.CubeGeometry(260, 35, 185, 1, 1, 1); <!-- 定义一个立方体，就是那本书的模型 -->
+
+        var cubeMaterialArray = [];
+        cubeMaterialArray.push(new THREE.MeshBasicMaterial({
+            map : new THREE.ImageUtils.loadTexture('img/side-up.png')  /*给每一面上贴图，下同*/
+        }));
+        cubeMaterialArray.push(new THREE.MeshBasicMaterial({
+            map : new THREE.ImageUtils.loadTexture('img/side-up.png')
+        }));
+        cubeMaterialArray.push(new THREE.MeshBasicMaterial({
+            map : new THREE.ImageUtils.loadTexture('img/up.png')
+        }));
+        cubeMaterialArray.push(new THREE.MeshBasicMaterial({
+            map : new THREE.ImageUtils.loadTexture('img/down.png')
+        }));
+        cubeMaterialArray.push(new THREE.MeshBasicMaterial({
+            map : new THREE.ImageUtils.loadTexture('img/side-right.png')
+        }));
+        cubeMaterialArray.push(new THREE.MeshBasicMaterial({
+            map : new THREE.ImageUtils.loadTexture('img/side-left.png')
+        }));
+        var cubeMaterials = new THREE.MeshFaceMaterial(cubeMaterialArray);
+
+        cube = new THREE.Mesh(cubeGeometry, cubeMaterials);
+        cube.position.set(0, 0, 0); <!-- 立方体放置的位置 -->
+        scene.add(cube);
+
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+        update();
+    }
+
+    function update() {
+        // delta = change in time since last call (in seconds)
+        var delta = clock.getDelta();
+
+        controls.update();
+        stats.update();
+    }
+
+    function render() {
+        renderer.render(scene, camera);
+    }
+</script>
+</body>
+</html>

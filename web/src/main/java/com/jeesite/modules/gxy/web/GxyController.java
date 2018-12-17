@@ -23,7 +23,7 @@ public class GxyController extends BaseController {
 
     @RequestMapping(value = "webgl")
     public String webgl() {
-        return "gxy/webgl";
+        return "gxy/webgl02";
     }
     @RequestMapping(value = "hello")
     public String hello() {
