@@ -808,7 +808,9 @@
     
     div.innerHTML = content || '';
     lay(that.elem).find('.'+ ELEM_HINT).remove();
-    that.elem.appendChild(div);
+    if (that.elem){ // ThinkGem 可能会为空
+    	that.elem.appendChild(div);
+    }
 
     clearTimeout(that.hinTimer);
     that.hinTimer = setTimeout(function(){
@@ -1802,7 +1804,13 @@
     ,showEvent = function(elem, bind){
       elem.on(options.trigger, function(){
         bind && (that.bindElem = this);
-        that.render();
+        if(options.trigger === 'focus'){ // ThinkGem 冒泡事件优先处理时，可能会呼不出，增加延迟。
+        	setTimeout(function(){
+        		that.render();
+        	},100);
+        }else{
+        	that.render();
+        }
       });
     };
     
