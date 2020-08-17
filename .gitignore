@@ -2,7 +2,10 @@
 **/target
 **/webapp/userfiles
 **/WEB-INF/classes
+**/transaction-logs
 **/logs/*.log*
+*.epoch
+*.lic
 
 .settings
 .apt_generated
@@ -15,10 +18,7 @@
 *.ipr
 *.iml
 *.iws
-*.lic
 
 .DS_Store
 Thumbs.db
 rebel.xml
-
-*.epoch
