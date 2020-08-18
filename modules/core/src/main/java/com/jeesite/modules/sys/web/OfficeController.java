@@ -58,6 +58,16 @@ public class OfficeController extends BaseController {
 	 * @param office
 	 */
 	@RequiresPermissions("sys:office:view")
+	@RequestMapping(value = "index")
+	public String index(Office office, Model model) {
+		return REDIRECT + adminPath + "/sys/office/list";
+	}
+
+	/**
+	 * 机构列表
+	 * @param office
+	 */
+	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = "list")
 	public String list(Office office, Model model) {
 		model.addAttribute("office", office);
