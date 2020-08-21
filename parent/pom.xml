@@ -68,6 +68,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version><!--$NO-MVN-MAN-VER$ -->
 				<configuration>
 					<showWarnings>true</showWarnings>
 <!-- 					<compilerArguments> -->
@@ -81,6 +82,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version><!--$NO-MVN-MAN-VER$ -->
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<archive>
@@ -153,6 +155,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1.1</version>
 					<configuration>
 						<packagingExcludes></packagingExcludes>
 						<warSourceExcludes></warSourceExcludes>
@@ -168,6 +171,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.10</version>
 					<configuration>
 						<downloadSources>${eclipse-plugin-download-sources}</downloadSources>
 						<downloadJavadocs>${eclipse-plugin-download-javadocs}</downloadJavadocs>
@@ -234,20 +238,6 @@
 							<exclude>**/*.min.js</exclude>
 							<exclude>**/*.min.css</exclude>
 						</excludes>
-<!-- 					<aggregations> -->
-<!-- 						<aggregation> -->
-<!-- 							<removeIncluded>true</removeIncluded> -->
-<!-- 							<insertNewLine>true</insertNewLine> -->
-<!-- 							<inputDir>${project.build.directory}/${project.build.finalName}</inputDir> -->
-<!-- 							<output>${project.build.directory}/${project.build.finalName}/app/js/app.pack.js</output> -->
-<!-- 							<includes> -->
-<!-- 								<include>app/js/app*.js</include> -->
-<!-- 							</includes> -->
-<!-- 							<excludes> -->
-<!-- 								<exclude>**/**min.js</exclude> -->
-<!-- 							</excludes> -->
-<!-- 						</aggregation> -->
-<!-- 					</aggregations> -->
 					</configuration>
 				</plugin>
 				
