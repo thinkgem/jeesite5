@@ -13,7 +13,7 @@
 	<artifactId>jeesite-web</artifactId>
 	<packaging>war</packaging>
 	
-	<name>JeeSite Boot</name>
+	<name>JeeSite Web</name>
 	<url>http://jeesite.com</url>
 	<inceptionYear>2013-Now</inceptionYear>
 	
@@ -127,20 +127,20 @@
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
 		<repository>
-			<id>jeesite-repos-s</id>
+			<id>jeesite-repos</id>
 			<url>http://maven.jeesite.net/repository/maven-public</url>
-		</repository>
-		<repository>
-			<id>sonatype-repos-s</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>aliyun-repos</id>
 			<url>https://maven.aliyun.com/repository/public</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>false</enabled></snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jeesite-repos</id>
+			<url>http://maven.jeesite.net/repository/maven-public</url>
 		</pluginRepository>
 	</pluginRepositories>
 	

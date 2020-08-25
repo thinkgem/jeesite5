@@ -211,11 +211,11 @@
 					</executions>
 				</plugin>
 				
-				<!-- YUI Compressor (CSS/JS压缩) -->
+				<!-- JavaScript CSS Compress -->
 				<plugin>
-					<groupId>net.alchim31.maven</groupId>
-					<artifactId>yuicompressor-maven-plugin</artifactId>
-					<version>1.5.1</version>
+					<groupId>com.jeesite.maven</groupId>
+					<artifactId>compressor-maven-plugin</artifactId>
+					<version>1.0.0-SNAPSHOT</version>
 					<executions>
 						<execution>
 							<phase>prepare-package</phase>
@@ -282,17 +282,21 @@
 			<releases><enabled>true</enabled></releases>
 			<snapshots><enabled>false</enabled></snapshots>
 		</repository>
-        <repository>
-		    <id>sonatype-repos-s</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
+		<repository>
+			<id>jeesite-repos</id>
+			<url>http://maven.jeesite.net/repository/maven-public</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>aliyun-repos</id>
 			<url>https://maven.aliyun.com/repository/public</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>false</enabled></snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>jeesite-repos</id>
+			<url>http://maven.jeesite.net/repository/maven-public</url>
 		</pluginRepository>
 	</pluginRepositories>
 	
@@ -303,8 +307,8 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
+						<groupId>com.jeesite.maven</groupId>
+						<artifactId>compressor-maven-plugin</artifactId>
 					</plugin>
 				</plugins>
 			</build>
@@ -316,8 +320,8 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>net.alchim31.maven</groupId>
-						<artifactId>yuicompressor-maven-plugin</artifactId>
+						<groupId>com.jeesite.maven</groupId>
+						<artifactId>compressor-maven-plugin</artifactId>
 					</plugin>
 				</plugins>
 			</build>
@@ -329,15 +333,15 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>net.alchim31.maven</groupId>
-						<artifactId>yuicompressor-maven-plugin</artifactId>
+						<groupId>com.jeesite.maven</groupId>
+						<artifactId>compressor-maven-plugin</artifactId>
 					</plugin>
 				</plugins>
 			</build>
 			<distributionManagement>
 				<snapshotRepository>
-					<id>sonatype-repos-s</id>
-					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+					<id>jeesite-repos-s</id>
+					<url>http://maven.jeesite.net/repository/maven-snapshots</url>
 				</snapshotRepository>
 			</distributionManagement>
 		</profile>
