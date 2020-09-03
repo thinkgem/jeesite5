@@ -3,7 +3,7 @@
 #  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
 #  *
 #  * Author: ThinkGem@163.com
-#  * 
+#  *
 #  */
 echo ""
 echo "[信息] 打包Web工程，并运行Web工程。"
@@ -22,4 +22,5 @@ cp web.war ./web
 cd web
 jar -xvf web.war
 cd WEB-INF
+chmod +x ./startup.sh
 exec ./startup.sh
