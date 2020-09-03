@@ -18,6 +18,8 @@
 *.ipr
 *.iml
 *.iws
+*.swp
+*.swo
 
 .DS_Store
 Thumbs.db
