@@ -50,7 +50,7 @@ else {
 <% if (@Global.getConfigToBoolean('error.page.printErrorInfo', 'true')){ %>
 <div class="box mt20">
 	${@StringUtils.toHtml(@ExceptionUtils.getStackTraceAsString(ex))}<br/>
-	此异常信息若不想输出，可打开jeesite.yml文件，设置error.page.printErrorInfo=false即可
+	此异常信息若不想输出，可打开 'application.yml' 文件，设置 'error.page.printErrorInfo: false' 即可
 </div>
 <% } %>
 <% } %>
