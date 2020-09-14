@@ -1,41 +1,5 @@
 SET SESSION FOREIGN_KEY_CHECKS=0;
 
-/* Drop Tables */
-
-DROP TABLE IF EXISTS js_gen_table_column;
-DROP TABLE IF EXISTS js_gen_table;
-DROP TABLE IF EXISTS js_sys_company_office;
-DROP TABLE IF EXISTS js_sys_employee_post;
-DROP TABLE IF EXISTS js_sys_user_data_scope;
-DROP TABLE IF EXISTS js_sys_user_role;
-DROP TABLE IF EXISTS js_sys_user;
-DROP TABLE IF EXISTS js_sys_employee;
-DROP TABLE IF EXISTS js_sys_company;
-DROP TABLE IF EXISTS js_sys_area;
-DROP TABLE IF EXISTS js_sys_config;
-DROP TABLE IF EXISTS js_sys_dict_data;
-DROP TABLE IF EXISTS js_sys_dict_type;
-DROP TABLE IF EXISTS js_sys_file_upload;
-DROP TABLE IF EXISTS js_sys_file_entity;
-DROP TABLE IF EXISTS js_sys_job_log;
-DROP TABLE IF EXISTS js_sys_job;
-DROP TABLE IF EXISTS js_sys_lang;
-DROP TABLE IF EXISTS js_sys_log;
-DROP TABLE IF EXISTS js_sys_role_menu;
-DROP TABLE IF EXISTS js_sys_menu;
-DROP TABLE IF EXISTS js_sys_module;
-DROP TABLE IF EXISTS js_sys_msg_inner_record;
-DROP TABLE IF EXISTS js_sys_msg_inner;
-DROP TABLE IF EXISTS js_sys_msg_push;
-DROP TABLE IF EXISTS js_sys_msg_pushed;
-DROP TABLE IF EXISTS js_sys_msg_template;
-DROP TABLE IF EXISTS js_sys_office;
-DROP TABLE IF EXISTS js_sys_post;
-DROP TABLE IF EXISTS js_sys_role_data_scope;
-DROP TABLE IF EXISTS js_sys_role;
-
-
-
 
 /* Create Tables */
 
@@ -293,7 +257,7 @@ CREATE TABLE js_sys_file_entity
 	file_path varchar(1000) NOT NULL COMMENT '文件相对路径',
 	file_content_type varchar(200) NOT NULL COMMENT '文件内容类型',
 	file_extension varchar(100) NOT NULL COMMENT '文件后缀扩展名',
-	file_size decimal(38) NOT NULL COMMENT '文件大小(单位B)',
+	file_size decimal(31) NOT NULL COMMENT '文件大小(单位B)',
 	PRIMARY KEY (file_id),
 	UNIQUE (file_md5)
 ) COMMENT = '文件实体表';

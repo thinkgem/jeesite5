@@ -8,30 +8,6 @@
 -- runing in dedicated mode, so only consider the above as a hint ;-)
 --
 
-delete from js_job_fired_triggers;
-delete from js_job_simple_triggers;
-delete from js_job_simprop_triggers;
-delete from js_job_cron_triggers;
-delete from js_job_blob_triggers;
-delete from js_job_triggers;
-delete from js_job_job_details;
-delete from js_job_calendars;
-delete from js_job_paused_trigger_grps;
-delete from js_job_locks;
-delete from js_job_scheduler_state;
-
-drop table js_job_calendars;
-drop table js_job_fired_triggers;
-drop table js_job_blob_triggers;
-drop table js_job_cron_triggers;
-drop table js_job_simple_triggers;
-drop table js_job_simprop_triggers;
-drop table js_job_triggers;
-drop table js_job_job_details;
-drop table js_job_paused_trigger_grps;
-drop table js_job_locks;
-drop table js_job_scheduler_state;
-
 
 CREATE TABLE js_job_job_details
   (

@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>131</x>
-	<y>31</y>
+	<x>0</x>
+	<y>0</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -41,7 +41,7 @@
 		<suspend_validator>false</suspend_validator>
 		<export_setting>
 			<export_ddl_setting>
-				<output_path>db\mysql\test.sql</output_path>
+				<output_path>db\test.sql</output_path>
 				<encoding>UTF-8</encoding>
 				<line_feed>CR+LF</line_feed>
 				<is_open_after_saved>false</is_open_after_saved>
@@ -58,7 +58,7 @@
 					<create_view>false</create_view>
 					<drop_index>false</drop_index>
 					<drop_sequence>false</drop_sequence>
-					<drop_table>true</drop_table>
+					<drop_table>false</drop_table>
 					<drop_tablespace>false</drop_tablespace>
 					<drop_trigger>false</drop_trigger>
 					<drop_view>false</drop_view>
@@ -168,7 +168,7 @@
 	</settings>
 	<dictionary>
 		<word>
-			<id>b6d7af0ea5dad1a0925ff63d5bd2d33946640369</id>
+			<id>136ca02f1b3a96a8f2e242d5dd64d48f566143ef</id>
 			<length>64</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -184,7 +184,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>810c114a1c22e1766589ec6b6da020db683137f8</id>
+			<id>f116706ac00cd3a3ee88b2a88debf7ebc3eeb12d</id>
 			<length>100</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -1020,12 +1020,12 @@
 	</tablespace_set>
 	<contents>
 		<table>
-			<id>fb11bc47b30b0d8e468d3cd16ed660bf57bc8863</id>
-			<height>217</height>
-			<width>320</width>
+			<id>666aac17612ed79dc297a8c75b9f1f7a4cad049c</id>
+			<height>438</height>
+			<width>346</width>
 				<font_name>Segoe UI</font_name>
 				<font_size>9</font_size>
-			<x>396</x>
+			<x>480</x>
 			<y>36</y>
 			<color>
 				<r>128</r>
@@ -1546,12 +1546,12 @@
 			</table_properties>
 		</table>
 		<table>
-			<id>b7226377b79c26a490f7bf5789c1f74ed96e1b6f</id>
-			<height>359</height>
-			<width>323</width>
+			<id>45418c07c4a2b3552116f1d6bbd3884de6348ea2</id>
+			<height>438</height>
+			<width>387</width>
 				<font_name>Segoe UI</font_name>
 				<font_size>9</font_size>
-			<x>756</x>
+			<x>876</x>
 			<y>36</y>
 			<color>
 				<r>128</r>
@@ -2184,7 +2184,7 @@
 				<group_name>BaseEntityCorp</group_name>
 				<columns>
 					<normal_column>
-						<word_id>b6d7af0ea5dad1a0925ff63d5bd2d33946640369</word_id>
+						<word_id>136ca02f1b3a96a8f2e242d5dd64d48f566143ef</word_id>
 						<id>b8ea4b73d6d32a222e5abfd453287575ae518480</id>
 						<description></description>
 						<unique_key_name></unique_key_name>
@@ -2217,7 +2217,7 @@
 						</sequence>
 					</normal_column>
 					<normal_column>
-						<word_id>810c114a1c22e1766589ec6b6da020db683137f8</word_id>
+						<word_id>f116706ac00cd3a3ee88b2a88debf7ebc3eeb12d</word_id>
 						<id>b94f5fe344185c40739cf93d1090686001bb11e0</id>
 						<description></description>
 						<unique_key_name></unique_key_name>

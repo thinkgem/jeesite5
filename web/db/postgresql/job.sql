@@ -3,17 +3,6 @@
 -- In your Quartz properties file, you'll need to set 
 -- org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
 
-drop table js_job_fired_triggers;
-DROP TABLE js_job_PAUSED_TRIGGER_GRPS;
-DROP TABLE js_job_SCHEDULER_STATE;
-DROP TABLE js_job_LOCKS;
-drop table js_job_simple_triggers;
-drop table js_job_cron_triggers;
-drop table js_job_simprop_triggers;
-DROP TABLE js_job_BLOB_TRIGGERS;
-drop table js_job_triggers;
-drop table js_job_job_details;
-drop table js_job_calendars;
 
 CREATE TABLE js_job_job_details
   (
