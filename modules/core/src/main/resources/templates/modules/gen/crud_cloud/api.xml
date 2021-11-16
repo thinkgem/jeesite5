@@ -6,10 +6,6 @@
 	<filePath>${moduleName}-client/src/main/java/${packageName}/${moduleName}/api/${subModuleName}</filePath>
 	<fileName>${ClassName}ServiceApi.java</fileName>
 	<content><![CDATA[
-/**
- * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
- * No deletion without permission, or be held responsible to law.
- */
 package ${packageName}.${moduleName}.api${isNotEmpty(subModuleName)?'.'+subModuleName:''};
 
 import org.springframework.web.bind.annotation.RequestMapping;

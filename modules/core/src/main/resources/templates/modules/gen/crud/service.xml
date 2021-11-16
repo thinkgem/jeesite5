@@ -6,10 +6,6 @@
 	<filePath>src/main/java/${packageName}/${moduleName}/service/${subModuleName}</filePath>
 	<fileName>${ClassName}Service.java</fileName>
 	<content><![CDATA[
-/**
- * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
- * No deletion without permission, or be held responsible to law.
- */
 package ${packageName}.${moduleName}.service${isNotEmpty(subModuleName)?'.'+subModuleName:''};
 
 import java.util.List;
