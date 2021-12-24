@@ -72,6 +72,7 @@ JeeSite 是一个低代码开发平台，具有较高的封装度、扩展性，
 * Flowable业务流程模块（BPM）：<http://jeesite.com/docs/bpm/>
 * 内容管理模块（CMS）：<https://gitee.com/thinkgem/jeesite4-cms>
 * 手机端移动端：<https://gitee.com/thinkgem/jeesite4-uniapp>
+* Vue3分离版本：<http://vue.jeesite.com>
 
 ## 快速体验
 
