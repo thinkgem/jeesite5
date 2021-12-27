@@ -57,6 +57,12 @@ JeeSite 是一个低代码开发平台，具有较高的封装度、扩展性，
 * 工作流引擎：Flowable 6.6、符合 BPMN 规范、在线流程设计器、中国式流程、退回、撤回、自由流
 * 技术选型（详细）：<http://jeesite.com/docs/technology/>
 
+疑问：为什么不使用 Bootstrap、AdminLTE 新版本？
+1. 前端发展迅速，向下兼容性是前端最大的弊端，会造成升级 JeeSite 变的困难，无法做到平滑升级。
+2. 其实 JeeSite 一直为前端组件做相应升级，满足各种需求场景，可以达到相应的效果，并向下兼容。 
+3. 为了兼容 IE 浏览器，2020年浏览器国内市场份额分析，还是有一定的 IE 占有率。
+4. JeeSite 也提供了更先进的分离端版本：<http://vue.jeesite.com>
+
 ## 更多介绍
 
 * 内置功能：<https://jeesite.com/docs/function/>
