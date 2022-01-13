@@ -264,8 +264,8 @@ public class OfficeController extends BaseController {
 
 	/**
 	 * 获取机构树结构数据
-	 * @param excludeCode		排除的ID
-	 * @param parentCode	上级Code
+	 * @param excludeCode	排除的ID
+	 * @param parentCode 	设置父级编码返回一级
 	 * @param isAll			是否显示所有机构（true：不进行权限过滤）
 	 * @param officeTypes	机构类型（1：省级公司；2：市级公司；3：部门）
 	 * @param companyCode	仅查询公司下的机构
@@ -281,7 +281,7 @@ public class OfficeController extends BaseController {
 	@ResponseBody
 	public List<Map<String, Object>> treeData(String excludeCode, String parentCode, Boolean isAll,
 			String officeTypes, String companyCode, String isShowCode, String isShowFullName,
-			String isLoadUser, String postCode, String roleCode, String ctrlPermi) {
+			String isLoadUser, String userIdPrefix, String postCode, String roleCode, String ctrlPermi) {
 		List<Map<String, Object>> mapList = ListUtils.newArrayList();
 		Office where = new Office();
 		where.setStatus(Office.STATUS_NORMAL);
@@ -297,6 +297,7 @@ public class OfficeController extends BaseController {
 		if (StringUtils.isNotBlank(officeTypes)){
 			where.setOfficeType_in(officeTypes.split(","));
 		}
+		List<String> idList = ListUtils.newArrayList();
 		List<Office> list = officeService.findList(where);
 		for (int i = 0; i < list.size(); i++) {
 			Office e = list.get(i);
@@ -313,6 +314,7 @@ public class OfficeController extends BaseController {
 					continue;
 				}
 			}
+			idList.add(e.getId());
 			Map<String, Object> map = MapUtils.newHashMap();
 			map.put("id", e.getId());
 			map.put("pId", e.getParentCode());
@@ -323,23 +325,21 @@ public class OfficeController extends BaseController {
 			map.put("code", e.getViewCode());
 			map.put("name", StringUtils.getTreeNodeName(isShowCode, e.getViewCode(), name));
 			map.put("title", e.getFullName());
-			// 如果需要加载用户，则处理用户数据
-			if (StringUtils.inString(isLoadUser, "true", "lazy")) {
-				map.put("isParent", true);
-				// 一次性后台加载用户，若数据量比较大，建议使用懒加载
-				if (StringUtils.equals(isLoadUser, "true")) {
-					List<Map<String, Object>> userList = 
-							empUserController.treeData("u_", e.getOfficeCode(), e.getOfficeCode(), 
-									companyCode, postCode, roleCode, isAll, isShowCode, ctrlPermi);
-					mapList.addAll(userList);
-				}
-			}
+			// 返回是否是父节点，如果需要加载用户，则全部都是父节点，来加载用户数据
+			map.put("isParent", !e.getIsTreeLeaf() || StringUtils.inString(isLoadUser, "true", "lazy"));
 			mapList.add(map);
+		}
+		// 一次性后台加载用户，若数据量比较大，建议使用懒加载
+		if (StringUtils.equals(isLoadUser, "true") && idList.size() > 0) {
+			List<Map<String, Object>> userList = 
+				empUserController.treeData(userIdPrefix, idList.toArray(new String[idList.size()]), 
+						companyCode, postCode, roleCode, isAll, isShowCode, ctrlPermi);
+			mapList.addAll(userList);
 		}
 		// 懒加载用户，点击叶子节点的时候再去加载部门（懒加载无法回显，数据量大时，建议使用 listselect 实现列表选择用户）
 		if (StringUtils.inString(isLoadUser, "lazy") && StringUtils.isNotBlank(parentCode)) {
 			List<Map<String, Object>> userList = 
-					empUserController.treeData("u_", parentCode, parentCode, 
+					empUserController.treeData(userIdPrefix, new String[]{parentCode}, 
 							companyCode, postCode, roleCode, isAll, isShowCode, ctrlPermi);
 			mapList.addAll(userList);
 		}
