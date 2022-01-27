@@ -104,7 +104,7 @@ $("#inputForm").validate({
 			if(data.result == Global.TRUE){
 				js.closeCurrentTabPage(function(contentWindow){
 					(contentWindow.win||contentWindow).$('#dataGrid').dataGrid('refreshTreeChildren',
-							$('#parentCode').val(), '${company.id}');
+							$('#parentCode').val(), '${area.id}');
 				});
 			}
 		}, "json");
