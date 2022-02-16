@@ -87,7 +87,7 @@ JeeSite 是一个低代码开发平台，具有较高的封装度、扩展性，
 
 ### 本地运行
 
-1. 环境准备：`JDK 1.8 or 11、17`、`Maven 3.6+`、`MySQL 5.7 or 8.0`（[支持更多数据库](https://jeesite.com/docs/technology/#8已支持数据库)）
+1. 环境准备：`JDK 1.8 or 11、17`、`Maven 3.6+`、`MySQL 5.7 or 8.0`（[支持更多数据库](https://jeesite.com/docs/technology/#_8、已支持数据库)）
 2. 执行命令：`git clone https://gitee.com/thinkgem/jeesite4.git` 下载源码（master分支）
 3. 打开文件：`/web/src/main/resources/config/application.yml` 配置JDBC连接
 4. 执行脚本：`/web/bin/init-data.bat` 初始化数据库
