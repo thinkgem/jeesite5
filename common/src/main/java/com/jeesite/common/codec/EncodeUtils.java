@@ -279,7 +279,7 @@ public class EncodeUtils {
 	
 	// 预编译SQL过滤正则表达式
 	private static Pattern sqlPattern = Pattern.compile(
-			"(?:')|(?:--)|(/\\*(?:.|[\\n\\r])*?\\*/)|((extractvalue|updatexml)([\\s]*?)\\()|"
+			"(?:')|(?:--)|(/\\*(?:.|[\\n\\r])*?\\*/)|((extractvalue|updatexml|if|mid|database)([\\s]*?)\\()|"
 			+ "(\\b(select|update|and|or|delete|insert|trancate|char|into|substr|ascii|declare|exec|count|master|into|drop|execute|case when|sleep|union|load_file)\\b)",
 			Pattern.CASE_INSENSITIVE);
 
