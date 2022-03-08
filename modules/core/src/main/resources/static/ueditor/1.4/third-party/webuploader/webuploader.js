@@ -2971,9 +2971,9 @@
             method: 'POST',
     
             // 跨域时，是否允许携带cookie, 只有html5 runtime才有效
-            withCredentials: false,
+            withCredentials: true,
             fileVal: 'file',
-            timeout: 2 * 60 * 1000,    // 2分钟
+            timeout: 0, //2 * 60 * 1000,    // 2分钟
             formData: {},
             headers: {},
             sendAsBinary: false
