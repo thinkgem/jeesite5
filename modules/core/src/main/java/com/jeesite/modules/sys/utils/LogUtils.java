@@ -48,7 +48,6 @@ import io.netty.util.concurrent.DefaultThreadFactory;
  */
 public class LogUtils {
 
-	// 采用线程池优化性能
 	private static ExecutorService logThreadPool = new ThreadPoolExecutor(5, 20,
 			60L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(),
 			new DefaultThreadFactory("log-save"));
