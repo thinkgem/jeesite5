@@ -11,7 +11,7 @@
 	
 	<groupId>com.jeesite</groupId>
 	<artifactId>jeesite-parent</artifactId>
-	<version>4.4.0-SNAPSHOT</version>
+	<version>4.4.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<name>JeeSite Parent</name>
@@ -96,6 +96,9 @@
 <!-- 						<verbose /> 输出有关编译器正在执行的操作的消息 -->
 <!-- 						<bootclasspath>${JAVA_HOME}\jre\lib\rt.jar;${JAVA_HOME}\jre\lib\jce.jar</bootclasspath> -->
 <!-- 					</compilerArguments> -->
+					<excludes>
+						<exclude>target/generated-sources/**</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 				
@@ -151,24 +154,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-			</plugin>
-			 
-			<!-- ant插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-			</plugin>
-			
-			<!-- dependency插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-			</plugin>
-			
-			<!-- 测试用例插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 			
 		</plugins>
@@ -268,10 +253,11 @@
 					</configuration>
 				</plugin>
 				
-				<!-- 依赖插件
+				<!-- Eclipse m2e settings only -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
 					<configuration>
 						<lifecycleMappingMetadata>
 							<pluginExecutions>
@@ -279,7 +265,7 @@
 									<pluginExecutionFilter>
 										<groupId>org.apache.maven.plugins</groupId>
 										<artifactId>maven-dependency-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
+										<versionRange>${maven-dependency-plugin.version}</versionRange>
 										<goals>
 											<goal>copy-dependencies</goal>
 										</goals>
@@ -291,7 +277,7 @@
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
-				</plugin> -->
+				</plugin>
 				
 				<!-- Docker 插件 -->
 				<plugin>
