@@ -270,7 +270,7 @@ spring:
 #  # 缓存配置
 #  cache:
 #    # 缓存及会话共享（专业版）
-#    isClusterMode: false
+#    isClusterMode: true
 #    # 清理全部缓存按钮所清理的缓存列表
 #    clearNames: sysCache,corpCache,userCache,cmsCache,msgPcPoolCache,roleCache,fileUploadCache,bpmFormCache
 #    # 用户缓存
@@ -588,6 +588,7 @@ shiro:
 #  innerFilter.allowIp: 127.0.0.1
 
   # URI 权限过滤器定义（自定义添加参数时，请不要移除 ${adminPath}/** = user，否则会导致权限异常）
+  # 提示：填写过滤规则，请注意先后顺序，从上到下，先匹配先受用规则，匹配成功后不再继续匹配。
   filterChainDefinitions: |
     ${adminPath}/** = user
 
