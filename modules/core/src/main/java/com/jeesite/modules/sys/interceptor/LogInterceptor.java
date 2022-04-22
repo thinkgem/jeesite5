@@ -34,33 +34,32 @@ public class LogInterceptor extends BaseService implements HandlerInterceptor {
 	private static final String TRACE_ID = "TRACE_ID";
 	private static final ThreadLocal<Long> startTimeThreadLocal =
 			new NamedThreadLocal<Long>("LogInterceptor StartTime");
-	
+
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
-			Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+							 Object handler) throws Exception {
 		if (StringUtils.isBlank(MDC.get(TRACE_ID))) {
-            MDC.put(TRACE_ID, IdGen.nextId());
-        }
-		long beginTime = System.currentTimeMillis();// 1、开始时间  
-		startTimeThreadLocal.set(beginTime);		// 线程绑定变量（该数据只有当前请求的线程可见）  
+			MDC.put(TRACE_ID, IdGen.nextId());
+		}
+		long beginTime = System.currentTimeMillis();// 1、开始时间
+		startTimeThreadLocal.set(beginTime);		// 线程绑定变量（该数据只有当前请求的线程可见）
 		if (logger.isDebugEnabled()){
-	        logger.debug("开始计时: {}  URI: {}  IP: {}", new SimpleDateFormat("hh:mm:ss.SSS")
-	        	.format(beginTime), request.getRequestURI(), IpUtils.getRemoteAddr(request));
+			logger.debug("请求开始, URI: {}, IP: {}", request.getRequestURI(), IpUtils.getRemoteAddr(request));
 		}
 		return true;
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, 
-			ModelAndView modelAndView) throws Exception {
-		if (modelAndView != null){
-			logger.info("ViewName: " + modelAndView.getViewName() + " <<<<<<<<< " + request.getRequestURI() + " >>>>>>>>> " + handler);
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+						   ModelAndView modelAndView) throws Exception {
+		if (modelAndView != null && logger.isDebugEnabled()){
+			logger.debug("ViewName: " + modelAndView.getViewName() + " <<< " + request.getRequestURI() + " >>> " + handler);
 		}
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, 
-			Object handler, Exception ex) throws Exception {
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+								Object handler, Exception ex) throws Exception {
 		long endTime = System.currentTimeMillis(); 	// 2、结束时间
 		long startTime = 0; // 得到线程绑定的局部变量（开始时间）
 		if (startTimeThreadLocal != null){
@@ -74,16 +73,17 @@ public class LogInterceptor extends BaseService implements HandlerInterceptor {
 			startTime = endTime + 1000;	// 得到 -1000 方便统计
 		}
 		long executeTime = endTime - startTime;	// 3、获取执行时间
-		
+
 		// 保存日志
 		LogUtils.saveLog(UserUtils.getUser(), request, handler, ex, null, null, executeTime);
-		
+
 		// 打印JVM信息。
-		if (logger.isDebugEnabled()){
+		if (logger.isInfoEnabled()){
 			Runtime runtime = Runtime.getRuntime();
-	        logger.debug("计时结束: {}  用时: {}  URI: {}  总内存: {}  已用内存: {}",
-	        		DateUtils.formatDate(endTime, "hh:mm:ss.SSS"), TimeUtils.formatDateAgo(executeTime), request.getRequestURI(), 
-					ByteUtils.formatByteSize(runtime.totalMemory()), ByteUtils.formatByteSize(runtime.totalMemory()-runtime.freeMemory())); 
+			long totalMemory = runtime.totalMemory();
+			logger.info("请求完成, URI: {}, 用时: {}, 总内存: {}, 剩余: {}", request.getRequestURI(),
+					TimeUtils.formatDateAgo(executeTime), ByteUtils.formatByteSize(totalMemory),
+					ByteUtils.formatByteSize(totalMemory-(totalMemory-runtime.freeMemory())));
 		}
 		MDC.remove(TRACE_ID);
 	}
