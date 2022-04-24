@@ -69,6 +69,7 @@
 		<!-- docker setting -->
         <docker.dockerHost>http://192.168.56.102:2375</docker.dockerHost>
         <docker.imageName>thinkgem/${project.artifactId}:4.3</docker.imageName>
+		<docker.run.port>8980:8980</docker.run.port>
         
 	</properties>
 	
@@ -216,7 +217,7 @@
 								<goal>jar</goal>
 							</goals>
 							<configuration>
-								<additionalparam>-Xdoclint:none</additionalparam>
+<!--								<additionalparam>-Xdoclint:none</additionalparam>-->
 							</configuration>  
 						</execution>
 					</executions>
