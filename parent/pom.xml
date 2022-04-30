@@ -82,88 +82,89 @@
 		</dependency>
 		
 	</dependencies>
-	
+
 	<build>
-	
+
 		<plugins>
-		
-			<!-- Compiler 插件, 设定JDK版本 -->
+
+			<!-- compiler插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<showWarnings>true</showWarnings>
-<!-- 					<compilerArguments> -->
-<!-- 						<verbose /> 输出有关编译器正在执行的操作的消息 -->
-<!-- 						<bootclasspath>${JAVA_HOME}\jre\lib\rt.jar;${JAVA_HOME}\jre\lib\jce.jar</bootclasspath> -->
-<!-- 					</compilerArguments> -->
-					<excludes>
-						<exclude>target/generated-sources/**</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
-				
-			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+
+			<!-- jar插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<!-- <encoding>${project.build.sourceEncoding}</encoding> -->
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<!-- <phase>prepare-package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals> -->
-						<configuration>
-							<!-- <classesDirectory>${project.outputDirectory}</classesDirectory>
-							<finalName>${finalName}</finalName>
-							<outputDirectory>${project.build.directory}/${project.artifactId}/WEB-INF/lib</outputDirectory>
-							<includes>
-								<include>com/thinkgem/jeesite/**</include>
-							</includes> -->
-							<archive>
-								<manifest>
-									<!-- Add directory entries -->
-									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-									<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-									<addClasspath>true</addClasspath>
-								</manifest>
-							</archive>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
-			
+
 			<!-- resource插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 			</plugin>
-			
+
 			<!-- install插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
 			</plugin>
-			
+
 			<!-- clean插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 			</plugin>
-			
+
 		</plugins>
-		
+
 		<pluginManagement>
-		
+
 			<plugins>
-				
-				<!-- 打包插件, war包名称不带版本号 -->
+
+				<!-- compiler插件，设定JDK版本 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<showWarnings>true</showWarnings>
+						<!-- <compilerArguments>
+							<verbose /> 输出有关编译器正在执行的操作的消息
+							<bootclasspath>${JAVA_HOME}\jre\lib\rt.jar;${JAVA_HOME}\jre\lib\jce.jar</bootclasspath>
+						</compilerArguments> -->
+					</configuration>
+				</plugin>
+
+				<!-- jar插件，配置manifest文件，加入lib包的jar依赖 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+						</archive>
+					</configuration>
+					<executions>
+						<execution>
+							<configuration>
+								<excludes>
+									<exclude>userfiles/**</exclude>
+								</excludes>
+								<finalName>${project.artifactId}</finalName>
+								<archive>
+									<manifest>
+										<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+										<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+										<addClasspath>true</addClasspath>
+									</manifest>
+								</archive>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- war插件，war包名称不带版本号 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
@@ -180,7 +181,7 @@
 						</archive>
 					</configuration>
 				</plugin>
-				
+
 				<!-- Eclipse 插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -204,7 +205,7 @@
 						</additionalProjectnatures>
 					</configuration>
 				</plugin>
-				
+
 				<!-- Java Document Generate -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -216,13 +217,13 @@
 							<goals>
 								<goal>jar</goal>
 							</goals>
-							<configuration>
-<!--								<additionalparam>-Xdoclint:none</additionalparam>-->
-							</configuration>  
+							<!-- <configuration>
+								<additionalparam>-Xdoclint:none</additionalparam>
+							</configuration> -->
 						</execution>
 					</executions>
 				</plugin>
-				
+
 				<!-- JavaScript CSS Compress -->
 				<plugin>
 					<groupId>com.jeesite.maven</groupId>
@@ -253,7 +254,7 @@
 						</excludes>
 					</configuration>
 				</plugin>
-				
+
 				<!-- Eclipse m2e settings only -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -279,12 +280,12 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-				
-				<!-- Docker 插件 -->
+
+				<!-- Docker 插件 https://github.com/fabric8io/docker-maven-plugin -->
 				<plugin>
 					<groupId>io.fabric8</groupId>
 					<artifactId>docker-maven-plugin</artifactId>
-					<version>0.33.0</version>
+					<version>0.39.1</version>
 					<configuration>
 						<dockerHost>${docker.dockerHost}</dockerHost>
 						<verbose>true</verbose>
@@ -310,11 +311,11 @@
 						</images>
 					</configuration>
 				</plugin>
-				
+
 			</plugins>
-			
+
 		</pluginManagement>
-		
+
 		<!-- 资源文件配置 -->
 		<resources>
 			<resource>
@@ -330,7 +331,7 @@
 				</excludes>
 			</resource>
 		</resources>
-		
+
 	</build>
 	
 	<developers>  
