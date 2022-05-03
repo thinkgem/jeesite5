@@ -48,7 +48,7 @@
 $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
-		{header:'${text("用户名称")}', name:'userName', index:'a.create_by_name', width:100, align:"center", formatter: function(val, obj, row, act){
+		{header:'${text("用户名称")}', name:'userName', index:'userName', width:100, align:"center", formatter: function(val, obj, row, act){
 			return '<span title="${text("账号")}：'+(row.userCode||'')+'">'+(val||'${text("游客")}');
 		}},
 		{header:'${text("创建时间")}', name:'startTimestamp', firstsortorder:'desc', width:100, align:'center'},

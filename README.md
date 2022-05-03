@@ -41,7 +41,7 @@ JeeSite 功能全，知识点非常多，也非常少。因为她使用的都是
 
 JeeSite 是一个低代码开发平台，具有较高的封装度、扩展性，封装不是限制你去做一些事情，而是在便捷的同时，也具有较好的扩展性，在不具备一些功能的情况下，JeeSite 提供了扩展接口，提供了原生调用方法。
 
-大家都在用 Spring，也在学习 Spring 的优点，Spring 提供了较好的扩展性，可又有多少人去修改它的源代码呢，退一步说，大家去修改了 Spring 的源码，反而会对未来升级造成很大困扰，您说不是呢？这样的例子很多，所以不要纠结，我们非常注重着一块，JeeSite 也一样具备强大的扩展性。
+大家都在用 Spring，也在学习 Spring 的优点，Spring 提供了较好的扩展性，可又有多少人去修改它的源代码呢，退一步说，大家去修改了 Spring 的源码，反而会对未来升级造成很大困扰，您说不是呢？这样的例子很多，所以不要纠结，我们非常注重这一点，JeeSite 也一样具备强大的扩展性。
 
 * 至今 JeeSite 平台架构已经非常稳定。
 * JeeSite 精益求精，用心打磨每一个细节。
@@ -132,7 +132,7 @@ thinkgem/jeesite-web && docker logs -f jeesite-web
 * 文件在线预览：<https://jeesite.com/docs/filepreview/>
 * 报表设计器：<https://jeesite.com/docs/ureport/>
 * 大屏设计器：<https://jeesite.com/docs/visual/>
-* 三员管理员：<https://jeesite.com/docs/3manager/>
+* 三员管理员：<https://jeesite.com/docs/manager3/>
 * 在线作业调度：<https://jeesite.com/docs/job/>
 * 消息推送：<https://jeesite.com/docs/msg-push-use/>
 * 手机端框架：<https://jeesite.com/docs/uniapp/>
@@ -155,11 +155,10 @@ thinkgem/jeesite-web && docker logs -f jeesite-web
    更不要，全局替换源代码中的 jeesite 或 ThinkGem 等字样，否则你将违反本协议条款承担责任。
 4. 您若套用本软件的一些代码或功能参考，请保留源文件中的版权和作者，需要在您的软件介绍明显位置
    说明出处，举例：本软件基于 JeeSite 快速开发平台，并附带链接：http://jeesite.com
-5. 请知悉该版本，用户数不可超过100个，最大允许20个用户同时在线（不含匿名）。
-6. 无限制版请访问分支：[V4.0](https://gitee.com/thinkgem/jeesite4/tree/v4.0_dev/)、[V4.1](https://gitee.com/thinkgem/jeesite4/tree/v4.1_dev/)、[V5.0](https://gitee.com/thinkgem/jeesite4/tree/v5.0_dev/)，源码下载：[V4.0](https://gitee.com/thinkgem/jeesite4/repository/archive/v4.0_dev.zip)、[V4.1](https://gitee.com/thinkgem/jeesite4/repository/archive/v4.1_dev.zip)、[V5.0](https://gitee.com/thinkgem/jeesite4/repository/archive/v5.0_dev.zip)
-7. 任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
-8. 如果你对本软件有改进，希望可以贡献给我们，共同进步。
-9. 本项目已申请软件著作权，请尊重开源，感谢阅读。
+5. 任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+6. 如果你对本软件有改进，希望可以贡献给我们，共同进步。
+7. 本项目已申请软件著作权，请尊重开源，感谢阅读。
+8. 本版本无用户数限制，无在线人数限制。
 
 ## 技术服务与支持
 
