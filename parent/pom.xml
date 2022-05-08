@@ -161,6 +161,7 @@
 						</warSourceExcludes>
 						<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory>
 						<warName>${project.artifactId}</warName>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
 						<archive>
 							<addMavenDescriptor>false</addMavenDescriptor>
 						</archive>
