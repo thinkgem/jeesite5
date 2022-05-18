@@ -327,7 +327,7 @@ public class ExcelExport implements Closeable{
 			Cell cell = headerRow.createCell(i);
 			cell.setCellStyle(styles.get("header"));
 			String[] ss = StringUtils.split(headerList.get(i), "**", 2);
-			if (ss.length==2){
+			if (ss.length == 2){
 				cell.setCellValue(ss[0]);
 				Comment comment = this.sheet.createDrawingPatriarch().createCellComment(
 						new XSSFClientAnchor(0, 0, 0, 0, (short) 3, 3, (short) 5, 6));
