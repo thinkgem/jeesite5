@@ -5,7 +5,7 @@
 <h3 align="center" style="margin:30px 0 30px;font-weight:bold;font-size:30px;">快速开发平台 - Spring Boot</h3>
 <p align="center">
  <a href="https://jeesite.com/docs/upgrade/" target="__blank"><img alt="JeeSite-V4.4" src="https://img.shields.io/badge/JeeSite-V4.4-success.svg"></a>
- <a href="https://spring.io/projects/spring-boot#learn" target="__blank"><img alt="SpringBoot-2.5" src="https://img.shields.io/badge/SpringBoot-2.5-blue.svg"></a>
+ <a href="https://spring.io/projects/spring-boot#learn" target="__blank"><img alt="SpringBoot-2.6" src="https://img.shields.io/badge/SpringBoot-2.6-blue.svg"></a>
  <a href="https://gitee.com/thinkgem/jeesite4/stargazers" target="__blank"><img alt="star" src="https://gitee.com/thinkgem/jeesite4/badge/star.svg?theme=dark"></a>
  <a href="https://gitee.com/thinkgem/jeesite4/members" target="__blank"><img alt="fork" src="https://gitee.com/thinkgem/jeesite4/badge/fork.svg?theme=dark"></a>
 </p>
@@ -51,7 +51,7 @@ JeeSite 是一个低代码开发平台，具有较高的封装度、扩展性，
 
 ## 技术选型
 
-* 主框架：Spring Boot 2.5、Spring Framework 5.3、Apache Shiro 1.9、J2Cache
+* 主框架：Spring Boot 2.6、Spring Framework 5.3、Apache Shiro 1.9、J2Cache
 * 持久层：Apache MyBatis 3.5、Hibernate Validator 6.2、Alibaba Druid 1.2
 * 视图层：Spring MVC 5.3、Beetl 3.3（替换JSP）、Bootstrap 3.3、AdminLTE 2.4
 * 前端组件：jQuery 3.5、jqGrid 4.7、layer 3.5、zTree 3.5、jQuery Validation
