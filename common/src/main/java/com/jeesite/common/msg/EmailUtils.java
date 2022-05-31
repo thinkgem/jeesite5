@@ -20,9 +20,6 @@ public class EmailUtils {
 
 	/**
 	 * 发送邮件
-	 * @param toAddress 接收地址
-	 * @param subject 标题
-	 * @param content 内容
 	 * @return
 	 */
 	public static boolean send(String toAddress, String subject, String content) {
@@ -30,9 +27,23 @@ public class EmailUtils {
 		String fromAddress = props.getProperty("msg.email.fromAddress");
 		String fromPassword = props.getProperty("msg.email.fromPassword");
 		String fromHostName = props.getProperty("msg.email.fromHostName");
+		Integer smtpPort = props.getPropertyToInteger("msg.email.smtpPort", "25");
 		String sslOnConnect = props.getProperty("msg.email.sslOnConnect", "false");
 		String sslSmtpPort = props.getProperty("msg.email.sslSmtpPort");
-		return send(fromAddress, fromPassword, fromHostName, sslOnConnect, sslSmtpPort, toAddress, subject, content);
+		return send(fromAddress, fromPassword, fromHostName, smtpPort, sslOnConnect, sslSmtpPort, toAddress, subject, content);
+	}
+
+	/**
+	 * 发送邮件
+	 * @param toAddress 接收地址
+	 * @param subject 标题
+	 * @param content 内容
+	 * @return
+	 */
+	@Deprecated
+	public static boolean send(String fromAddress, String fromPassword, String fromHostName,
+			String sslOnConnect, String sslSmtpPort, String toAddress, String subject, String content) {
+		return send(fromAddress, fromPassword, fromHostName, 25, sslOnConnect, sslSmtpPort, toAddress, subject, content);
 	}
 	
 	/**
@@ -42,7 +53,7 @@ public class EmailUtils {
 	 * @param content 内容
 	 * @return
 	 */
-	public static boolean send(String fromAddress, String fromPassword, String fromHostName,
+	public static boolean send(String fromAddress, String fromPassword, String fromHostName, Integer smtpPort,
 			String sslOnConnect, String sslSmtpPort, String toAddress, String subject, String content) {
 		try {
 			HtmlEmail htmlEmail = new HtmlEmail();
@@ -50,8 +61,10 @@ public class EmailUtils {
 			htmlEmail.setFrom(fromAddress);
 			// 密码校验
 			htmlEmail.setAuthentication(fromAddress, fromPassword);
-			// 发送服务器协议
+			// 发送服务器主机名
 			htmlEmail.setHostName(fromHostName);
+			// 发送服务器端口
+			htmlEmail.setSmtpPort(smtpPort);
 
 			// SSL
 			if ("true".equals(sslOnConnect)) {
