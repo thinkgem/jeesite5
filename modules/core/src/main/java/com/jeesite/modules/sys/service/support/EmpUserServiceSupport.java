@@ -39,7 +39,6 @@ import com.jeesite.modules.sys.utils.UserUtils;
  * @author ThinkGem
  * @version 2017-03-25
  */
-@Transactional(readOnly=true)
 public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 		implements EmpUserService{
 
@@ -123,7 +122,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	 * 保存用户员工
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void save(EmpUser user) {
 		// 1、初始化用户信息
 		if (user.getIsNewRecord()){
@@ -170,7 +169,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	 * @param file 导入的用户数据文件
 	 * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
 	 */
-	@Transactional(readOnly=false)
+	@Transactional
 	public String importData(MultipartFile file, Boolean isUpdateSupport) {
 		if (file == null){
 			throw new ServiceException(text("请选择导入的数据文件！"));
@@ -241,7 +240,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	 * 更新状态
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void updateStatus(EmpUser empUser) {
 		userService.updateStatus(empUser);
 		employeeService.updateStatus(empUser.getEmployee());
@@ -251,7 +250,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	 * 删除用户
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void delete(EmpUser empUser) {
 		userService.delete(empUser);
 		employeeService.delete(empUser.getEmployee());

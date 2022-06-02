@@ -25,7 +25,6 @@ import com.jeesite.modules.sys.utils.EmpUtils;
  * @author ThinkGem
  * @version 2016-4-23
  */
-@Transactional(readOnly=true)
 public class CompanyServiceSupport extends TreeService<CompanyDao, Company>
 		implements CompanyService{
 
@@ -64,7 +63,7 @@ public class CompanyServiceSupport extends TreeService<CompanyDao, Company>
 	 * 保存公司
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void save(Company company) {
 		if (company.getIsNewRecord()){
 			// 生成主键，并验证改主键是否存在，如存在则抛出验证信息
@@ -95,7 +94,7 @@ public class CompanyServiceSupport extends TreeService<CompanyDao, Company>
 	 * 删除公司
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void delete(Company company) {
 		super.delete(company);
 		// 清理公司相关缓存
@@ -106,7 +105,7 @@ public class CompanyServiceSupport extends TreeService<CompanyDao, Company>
 	 * 停用当前节点
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void updateStatus(Company company) {
 		dao.updateStatus(company);
 		// 清理公司相关缓存

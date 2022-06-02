@@ -17,7 +17,6 @@ import com.jeesite.modules.sys.service.PostService;
  * @author ThinkGem
  * @version 2017-03-25
  */
-@Transactional(readOnly=true)
 public class PostServiceSupport extends CrudService<PostDao, Post>
 		implements PostService{
 
@@ -50,7 +49,7 @@ public class PostServiceSupport extends CrudService<PostDao, Post>
 	 * 保存岗位
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void save(Post post) {
 		super.save(post);
 	}
@@ -59,7 +58,7 @@ public class PostServiceSupport extends CrudService<PostDao, Post>
 	 * 更新岗位状态
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void updateStatus(Post post) {
 		super.updateStatus(post);
 	}
@@ -68,7 +67,7 @@ public class PostServiceSupport extends CrudService<PostDao, Post>
 	 * 删除岗位
 	 */
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void delete(Post post) {
 		super.delete(post);
 	}

@@ -4,18 +4,17 @@
  */
 package com.jeesite.modules.cms.service;
 
-import java.util.List;
-
-import org.apache.commons.text.StringEscapeUtils;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.jeesite.common.lang.StringUtils;
 import com.jeesite.common.service.TreeService;
 import com.jeesite.modules.cms.dao.CategoryDao;
 import com.jeesite.modules.cms.entity.Category;
 import com.jeesite.modules.cms.utils.CmsUtils;
 import com.jeesite.modules.file.utils.FileUploadUtils;
+import org.apache.commons.text.StringEscapeUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 栏目表Service
@@ -23,7 +22,6 @@ import com.jeesite.modules.file.utils.FileUploadUtils;
  * @version 2020-7-24
  */
 @Service
-@Transactional(readOnly = true)
 public class CategoryService extends TreeService<CategoryDao, Category> {
 
 	/**
@@ -59,7 +57,7 @@ public class CategoryService extends TreeService<CategoryDao, Category> {
 	 * @param category
 	 */
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional
 	public void save(Category category) {
 		if (StringUtils.isNotBlank(category.getViewConfig())){
             category.setViewConfig(StringEscapeUtils.unescapeHtml4(category.getViewConfig()));
@@ -85,7 +83,7 @@ public class CategoryService extends TreeService<CategoryDao, Category> {
 	 * @param category
 	 */
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional
 	public void updateStatus(Category category) {
 		super.updateStatus(category);
 	}
@@ -95,7 +93,7 @@ public class CategoryService extends TreeService<CategoryDao, Category> {
 	 * @param category
 	 */
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional
 	public void delete(Category category) {
 		super.delete(category);
 	}

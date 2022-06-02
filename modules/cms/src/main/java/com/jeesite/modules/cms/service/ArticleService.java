@@ -40,7 +40,6 @@ import io.netty.util.concurrent.DefaultThreadFactory;
  * @version 2020-7-24
  */
 @Service
-@Transactional(readOnly = true)
 public class ArticleService extends CrudService<ArticleDao, Article> {
 
 	@Autowired
@@ -120,7 +119,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	 * @param article
 	 * @author ThinkGem
 	 */
-	@Transactional(readOnly = false)
+	@Transactional
 	public void updateExpiredWeight(Article article) {
 		// 更新过期的权重，间隔为“6”个小时
 		Date updateExpiredWeightDate = CmsUtils.getCache("updateExpiredWeightDateByArticle");
@@ -137,7 +136,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	 * @param article
 	 */
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional
 	public void save(Article article) {
 		Global.assertDemoMode();
 		// 设置内容状态
@@ -177,7 +176,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	 * @param article
 	 */
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional
 	public void updateStatus(Article article) {
 		super.updateStatus(article);
 	}
@@ -185,7 +184,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	/**
 	 * 获取文章获取文章并点击数加一
 	 */
-	@Transactional(readOnly = false)
+	@Transactional
 	public void updateHitsAddOne(String id) {
 		dao.updateHitsAddOne(id);
 	}
@@ -195,7 +194,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	 * @param article
 	 */
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional
 	public void delete(Article article) {
 		super.delete(article);
 	}

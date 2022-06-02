@@ -4,18 +4,16 @@
  */
 package com.jeesite.modules.cms.service;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.beust.jcommander.internal.Lists;
 import com.jeesite.modules.cms.entity.FileTemplete;
 import com.jeesite.modules.cms.entity.Site;
 import com.jeesite.modules.cms.utils.CmsUtils;
 import com.jeesite.modules.cms.utils.FileTempleteUtils;
 import com.jeesite.modules.sys.entity.DictData;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * 模版文件Service
@@ -23,7 +21,6 @@ import com.jeesite.modules.sys.entity.DictData;
  * @version 2020-7-7
  */
 @Service
-@Transactional(readOnly = true)
 public class FileTempleteService {
 
 //	public List<String> getTempleteContent(String prefix) throws IOException {
