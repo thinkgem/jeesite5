@@ -4,11 +4,11 @@
  */
 package com.jeesite.common.utils.excel.fieldtype;
 
-import java.util.List;
-
 import com.jeesite.common.lang.StringUtils;
 import com.jeesite.modules.sys.entity.Area;
 import com.jeesite.modules.sys.utils.AreaUtils;
+
+import java.util.List;
 
 /**
  * 字段类型转换
@@ -27,7 +27,8 @@ public class AreaType implements FieldType {
 	/**
 	 * 获取对象值（导入）
 	 */
-	public Object getValue(String val) {
+	@Override
+    public Object getValue(String val) {
 		for (Area e : list){
 			if (StringUtils.trimToEmpty(val).equals(e.getAreaName())){
 				return e;
@@ -39,6 +40,7 @@ public class AreaType implements FieldType {
 	/**
 	 * 获取对象值（导出）
 	 */
+	@Override
 	public String setValue(Object val) {
 		if (val != null && ((Area)val).getAreaName() != null){
 			return ((Area)val).getAreaName();

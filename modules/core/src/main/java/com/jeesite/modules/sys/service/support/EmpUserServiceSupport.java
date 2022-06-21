@@ -4,16 +4,6 @@
  */
 package com.jeesite.modules.sys.service.support;
 
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
 import com.jeesite.common.idgen.IdGen;
@@ -33,6 +23,14 @@ import com.jeesite.modules.sys.service.EmployeeService;
 import com.jeesite.modules.sys.service.UserService;
 import com.jeesite.modules.sys.utils.EmpUtils;
 import com.jeesite.modules.sys.utils.UserUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.PostConstruct;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.List;
 
 /**
  * 员工管理Service
@@ -54,7 +52,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	 */
 	@PostConstruct
 	private void corpModelValid() throws Exception{
-		if (Global.isUseCorpModel() != Global.getPropertyToBoolean("user.useCorpModel", "false")){
+		if (!Global.isUseCorpModel().equals(Global.getPropertyToBoolean("user.useCorpModel", "false"))){
 			throw new Exception("\n\nuser.useCorpModel=true? 你开启了多租户模式，似乎你的当前版本不是JeeSite专业版。\n");
 		}
 	}
@@ -93,6 +91,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	/**
 	 * 查询全部用户，仅返回基本信息
 	 */
+	@Override
 	public List<EmpUser> findUserList(EmpUser empUser){
 		return dao.findUserList(empUser);
 	}
@@ -100,6 +99,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	/**
 	 * 根据部门编码查询用户，仅返回基本信息
 	 */
+	@Override
 	public List<EmpUser> findUserListByOfficeCodes(EmpUser empUser){
 		return dao.findUserListByOfficeCodes(empUser);
 	}
@@ -107,6 +107,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	/**
 	 * 根据角色编码查询用户，仅返回基本信息
 	 */
+	@Override
 	public List<EmpUser> findUserListByRoleCodes(EmpUser empUser){
 		return dao.findUserListByRoleCodes(empUser);
 	}
@@ -114,6 +115,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	/**
 	 * 根据岗位编码查询用户，仅返回基本信息
 	 */
+	@Override
 	public List<EmpUser> findUserListByPostCodes(EmpUser empUser){
 		return dao.findUserListByPostCodes(empUser);
 	}
@@ -169,6 +171,7 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	 * @param file 导入的用户数据文件
 	 * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
 	 */
+	@Override
 	@Transactional
 	public String importData(MultipartFile file, Boolean isUpdateSupport) {
 		if (file == null){

@@ -4,18 +4,6 @@
  */
 package com.jeesite.modules.msg.service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.jeesite.common.callback.MethodCallback;
 import com.jeesite.common.collect.ListUtils;
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
@@ -28,17 +16,22 @@ import com.jeesite.modules.msg.dao.MsgInnerRecordDao;
 import com.jeesite.modules.msg.entity.MsgInner;
 import com.jeesite.modules.msg.entity.MsgInnerRecord;
 import com.jeesite.modules.msg.entity.MsgPush;
-import com.jeesite.modules.msg.entity.content.AppMsgContent;
-import com.jeesite.modules.msg.entity.content.BaseMsgContent;
-import com.jeesite.modules.msg.entity.content.EmailMsgContent;
-import com.jeesite.modules.msg.entity.content.PcMsgContent;
-import com.jeesite.modules.msg.entity.content.SmsMsgContent;
+import com.jeesite.modules.msg.entity.content.*;
 import com.jeesite.modules.msg.utils.MsgPushUtils;
 import com.jeesite.modules.sys.entity.EmpUser;
 import com.jeesite.modules.sys.entity.User;
 import com.jeesite.modules.sys.service.EmpUserService;
-
 import io.netty.util.concurrent.DefaultThreadFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 内部消息Service
@@ -192,16 +185,12 @@ public class MsgInnerService extends CrudService<MsgInnerDao, MsgInner> {
 				}
 			}
 		});
-		ListUtils.pageList(recordList, 100, new MethodCallback() {
-			@SuppressWarnings("unchecked")
-			public Object execute(Object... objs) {
-				return msgInnerRecordDao.insertBatch((List<MsgInnerRecord>)objs[0]);
-			}
-		});
+		msgInnerRecordDao.insertBatch(recordList, null);
 		// 手动触发消息推送任务
 		if (Global.TRUE.equals(Global.getProperty("msg.realtime.enabled"))){
 			msgPushThreadPool.submit(new Runnable() {
-				public void run() {
+				@Override
+                public void run() {
 					try{
 						MsgPushUtils.getMsgPushTask().execute();
 					}catch(Exception ex){

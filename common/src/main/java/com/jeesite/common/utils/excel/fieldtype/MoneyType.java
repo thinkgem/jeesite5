@@ -23,21 +23,24 @@ public class MoneyType implements FieldType {
 	/**
 	 * 获取对象值（导入）
 	 */
-	public Object getValue(String val) {
+	@Override
+    public Object getValue(String val) {
 		return val == null ? StringUtils.EMPTY : StringUtils.replace(val, ",", StringUtils.EMPTY);
 	}
 
 	/**
 	 * 获取对象值（导出）
 	 */
-	public String setValue(Object val) {
+	@Override
+    public String setValue(Object val) {
 		return val == null ? StringUtils.EMPTY : nf.format(val);
 	}
 	
 	/**
 	 * 获取对象值格式（导出）
 	 */
-	public String getDataFormat() {
+	@Override
+    public String getDataFormat() {
 		return "0.00";
 	}
 	

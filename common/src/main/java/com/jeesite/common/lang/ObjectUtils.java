@@ -247,7 +247,8 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 	
 	private static ThreadLocal<FSTConfiguration> fstConfiguration = 
 				new NamedThreadLocal<FSTConfiguration>("FSTConfiguration") {
-		public FSTConfiguration initialValue() {
+		@Override
+        public FSTConfiguration initialValue() {
 			return FSTConfiguration.createDefaultConfiguration();
 		}
 	};

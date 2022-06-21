@@ -31,7 +31,8 @@ public class RoleListType implements FieldType {
 	/**
 	 * 获取对象值（导入）
 	 */
-	public Object getValue(String val) {
+	@Override
+    public Object getValue(String val) {
 		List<String> list = new ArrayList<String>();
 		for (String s : StringUtils.split(val, ",")) {
 			for (Role e : roleList) {
@@ -46,7 +47,8 @@ public class RoleListType implements FieldType {
 	/**
 	 * 设置对象值（导出）
 	 */
-	public String setValue(Object val) {
+	@Override
+    public String setValue(Object val) {
 		if (val != null) {
 			@SuppressWarnings("unchecked")
 			List<Role> roleList = (List<Role>) val;

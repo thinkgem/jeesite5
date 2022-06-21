@@ -82,7 +82,8 @@ public class OfficeServiceSupport extends TreeService<OfficeDao, Office>
 	 * @param file 导入的机构数据文件
 	 * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
 	 */
-	@Transactional
+	@Override
+    @Transactional
 	public String importData(MultipartFile file, Boolean isUpdateSupport) {
 		if (file == null){
 			throw new ServiceException(text("请选择导入的数据文件！"));

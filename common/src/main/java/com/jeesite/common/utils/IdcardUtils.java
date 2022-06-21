@@ -24,17 +24,17 @@ public class IdcardUtils extends StringUtils {
 	public static final int CHINA_ID_MAX_LENGTH = 18;
 
 	/** 省、直辖市代码表 */
-	public static final String cityCode[] = { "11", "12", "13", "14", "15",
+	public static final String[] cityCode = { "11", "12", "13", "14", "15",
 			"21", "22", "23", "31", "32", "33", "34", "35", "36", "37", "41",
 			"42", "43", "44", "45", "46", "50", "51", "52", "53", "54", "61",
 			"62", "63", "64", "65", "71", "81", "82", "91" };
 
 	/** 每位加权因子 */
-	public static final int power[] = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9,
+	public static final int[] power = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9,
 			10, 5, 8, 4, 2 };
 
 	/** 第18位校检码 */
-	public static final String verifyCode[] = { "1", "0", "X", "9", "8", "7",
+	public static final String[] verifyCode = { "1", "0", "X", "9", "8", "7",
 			"6", "5", "4", "3", "2" };
 	/** 最低年限 */
 	public static final int MIN = 1930;
@@ -177,7 +177,7 @@ public class IdcardUtils extends StringUtils {
 		}
 		String[] cardval = validateIdCard10(card);
 		if (cardval != null) {
-			if (cardval[2].equals("true")) {
+			if ("true".equals(cardval[2])) {
 				return true;
 			}
 		}
@@ -276,10 +276,10 @@ public class IdcardUtils extends StringUtils {
 			info[0] = "台湾";
 			System.out.println("11111");
 			String char2 = idCard.substring(1, 2);
-			if (char2.equals("1")) {
+			if ("1".equals(char2)) {
 				info[1] = "M";
 				System.out.println("MMMMMMM");
-			} else if (char2.equals("2")) {
+			} else if ("2".equals(char2)) {
 				info[1] = "F";
 				System.out.println("FFFFFFF");
 			} else {
@@ -361,7 +361,7 @@ public class IdcardUtils extends StringUtils {
 			sum = sum + Integer.valueOf(c + "") * iflag;
 			iflag--;
 		}
-		if (end.toUpperCase().equals("A")) {
+		if ("A".equals(end.toUpperCase())) {
 			sum = sum + 10;
 		} else {
 			sum = sum + Integer.valueOf(end);

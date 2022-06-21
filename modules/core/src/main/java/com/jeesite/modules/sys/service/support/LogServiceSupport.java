@@ -43,7 +43,8 @@ public class LogServiceSupport extends CrudService<LogDao, Log>
 	/**
 	 * 不使用数据库事务，执行插入日志
 	 */
-	@Transactional//(propagation=Propagation.NOT_SUPPORTED)
+	@Override
+    @Transactional//(propagation=Propagation.NOT_SUPPORTED)
 	public void insertLog(Log entity) {
 		DataSourceHolder.setJdbcTransaction(false);
 		dao.insert(entity);
