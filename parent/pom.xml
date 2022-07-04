@@ -45,7 +45,7 @@
 		<mybatis-spring.version>2.0.6</mybatis-spring.version>
 		<jsqlparser.version>4.4</jsqlparser.version>
 		<druid.version>1.2.9</druid.version>
-		<shiro.version>1.9.0</shiro.version>
+		<shiro.version>1.9.1</shiro.version>
 		<j2cache.version>2.8.0-release</j2cache.version>
 		<swagger.version>1.6.0</swagger.version>
 		<log4j2.version>2.17.0</log4j2.version>
