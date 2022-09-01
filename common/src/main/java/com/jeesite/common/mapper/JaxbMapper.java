@@ -5,23 +5,18 @@
  */
 package com.jeesite.common.mapper;
 
+import com.jeesite.common.lang.ExceptionUtils;
+import com.jeesite.common.lang.StringUtils;
+import com.jeesite.common.reflect.ReflectUtils;
+
+import javax.xml.bind.*;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.namespace.QName;
-
-import com.jeesite.common.lang.ExceptionUtils;
-import com.jeesite.common.lang.StringUtils;
-import com.jeesite.common.reflect.ReflectUtils;
 
 /**
  * 使用Jaxb2.0实现XML<->Java Object的Mapper.
@@ -32,6 +27,7 @@ import com.jeesite.common.reflect.ReflectUtils;
  * @author calvin
  * @version 2013-01-15
  */
+@Deprecated
 @SuppressWarnings("rawtypes")
 public class JaxbMapper {
 
