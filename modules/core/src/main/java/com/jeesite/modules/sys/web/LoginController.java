@@ -237,6 +237,9 @@ public class LoginController extends BaseController{
 				successUrl = request.getContextPath() + successUrl;
 			}
 			model.addAttribute("__url", successUrl); // 告诉浏览器登录后跳转的页面
+			// 初始密码策略和密码修改策略验证（0：关闭；1：提醒用户；2：强制修改初始或旧密码）
+			String modifyPasswordMsg = PwdUtils.getModifyPasswordMsg(user, model);
+			model.addAttribute("modifyPasswordMsg", modifyPasswordMsg);
 			return ServletUtils.renderObject(response, model);
 		}
 		// 如果是登录操作，则跳转到登录成功页
