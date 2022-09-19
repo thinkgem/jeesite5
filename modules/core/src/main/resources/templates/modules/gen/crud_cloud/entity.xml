@@ -29,7 +29,7 @@ import com.jeesite.modules.bpm.entity.BpmTreeEntity;
 import com.jeesite.modules.bpm.entity.BpmEntity;
 	<% } %>
 <% } %>
-<% if(toBoolean(table.optionMap['isImportExport'])){ %>
+<% if(!table.parentExists && toBoolean(table.optionMap['isImportExport'])){ %>
 import com.jeesite.common.utils.excel.annotation.ExcelField;
 import com.jeesite.common.utils.excel.annotation.ExcelField.Align;
 import com.jeesite.common.utils.excel.annotation.ExcelFields;
@@ -215,7 +215,7 @@ public class ${ClassName} extends ${toBoolean(table.optionMap['isBpmForm'])?(tab
 	// 生成构造方法
 	%>
 
-	<% if(toBoolean(table.optionMap['isImportExport'])){ %>
+	<% if(!table.parentExists && toBoolean(table.optionMap['isImportExport'])){ %>
 	@ExcelFields({
 		<% for(c in table.columnList){ if(c.optionMap['isImportExport'] == @Global.YES){ %>
 		@ExcelField(title="${c.columnLabel}", attrName="${c.attrName}"${
