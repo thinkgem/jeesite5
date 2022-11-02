@@ -55,7 +55,11 @@ public class EmpUtils {
 	 */
 	public static Employee get(User user){
 		if (user != null && User.USER_TYPE_EMPLOYEE.equals(user.getUserType())){
-			return user.getRefObj();
+			Employee employee = user.getRefObj();
+			if (employee == null) {
+				employee = Static.employeeService.get(user.getRefCode());
+			}
+			return employee;
 		}
 		return null;
 	}
