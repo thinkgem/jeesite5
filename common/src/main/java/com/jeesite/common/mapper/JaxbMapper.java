@@ -26,6 +26,9 @@ import java.util.concurrent.ConcurrentMap;
  * 
  * @author calvin
  * @version 2013-01-15
+ * 
+ * 该类，没有用到，可以删掉
+ * 
  */
 @Deprecated
 @SuppressWarnings("rawtypes")
