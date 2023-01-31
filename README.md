@@ -51,7 +51,7 @@ JeeSite 是一个低代码开发平台，具有较高的封装度、扩展性，
 
 ## 技术选型
 
-* 主框架：Spring Boot 2.6、Spring Framework 5.3、Apache Shiro 1.9、J2Cache
+* 主框架：Spring Boot 2.7、Spring Framework 5.3、Apache Shiro 1.11、J2Cache
 * 持久层：Apache MyBatis 3.5、Hibernate Validator 6.2、Alibaba Druid 1.2
 * 视图层：Spring MVC 5.3、Beetl 3.3（替换JSP）、Bootstrap 3.3、AdminLTE 2.4
 * 前端组件：jQuery 3.5、jqGrid 4.7、layer 3.5、zTree 3.5、jQuery Validation
@@ -88,7 +88,7 @@ JeeSite 是一个低代码开发平台，具有较高的封装度、扩展性，
 ### 本地运行
 
 1. 环境准备：`JDK 1.8 or 11、17`、`Maven 3.6+`、使用 `MySQL 5.7 or 8.0` 数据库、[其它数据库](https://jeesite.com/docs/technology/#_8、已支持数据库)
-2. 下载源码：<https://gitee.com/thinkgem/jeesite4/repository/archive/v4.5.zip> 并解压
+2. 下载源码：<https://gitee.com/thinkgem/jeesite4/repository/archive/v4.6.zip> 并解压
 3. 打开文件：`/web/src/main/resources/config/application.yml` 配置JDBC连接
 4. 执行脚本：`/web/bin/init-data.bat` 初始化数据库
 5. 执行脚本：`/web/bin/run-tomcat.bat` 启动服务即可
