@@ -46,6 +46,20 @@
 			<artifactId>jeesite-module-swagger</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+
+		<!-- 内容管理模块 -->
+		<dependency>
+			<groupId>com.jeesite</groupId>
+			<artifactId>jeesite-module-cms</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+
+		<!-- 移动端模块 -->
+		<dependency>
+			<groupId>com.jeesite</groupId>
+			<artifactId>jeesite-module-app</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 		
 		<!-- 文件管理共享（标准版）
 		<dependency>
@@ -58,13 +72,6 @@
 		<dependency>
 			<groupId>com.jeesite</groupId>
 			<artifactId>jeesite-module-filepreview</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency> -->
-		
-		<!-- 内容管理模块
-		<dependency>
-			<groupId>com.jeesite</groupId>
-			<artifactId>jeesite-module-cms</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency> -->
 		
