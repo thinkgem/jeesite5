@@ -53,7 +53,7 @@ footer p{clear:left;margin-bottom:0}
 
 .breadcrumb {border-radius:8px;background:transparent;padding:0;margin:2px 15px 21px 15px;}
 
-.jumbotron {background:#fff;margin:48px auto;box-shadow:0 2px 4px 0 rgb(0 0 0 / 5%);border-radius:8px!important;}
+.jumbotron {background:#fff;margin:48px auto;border:1px solid #ededed;box-shadow:0 1px 4px 0 rgb(0 0 0 / 5%);border-radius:8px!important;}
 .jumbotron h1, .jumbotron .h1 {font-size:43px;margin: 0 0 30px;}
 .jumbotron .btn-sm {font-size:17px;}
 
@@ -67,8 +67,9 @@ footer p{clear:left;margin-bottom:0}
 .nav-search .form-control {height:30px;padding:5px;}
 .nav-search .btn {height:31px;padding:5px 10px;}
 
-.main {background:#fff;box-shadow:0 1px 4px 0 rgb(0 0 0 / 8%);border-radius:0 0 8px 8px;padding:20px 10px;margin:0}
+.main {background:#fff;box-shadow:0 1px 4px 0 rgb(0 0 0 / 8%);border-radius:0 0 8px 8px;padding:20px 10px;margin:0 -1px}
 .main-list {border-radius:8px;}
+.main-right::before {content:'';border-left:1px solid #e6e6e6;position:absolute;height:100%;left:-20px;}
 
 .article-list {padding:5px;margin:0;}
 .article-list li {list-style:none;padding:8px 0;}
