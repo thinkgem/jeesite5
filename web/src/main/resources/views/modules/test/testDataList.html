@@ -123,7 +123,7 @@ $('#dataGrid').dataGrid({
 	searchForm: $("#searchForm"),
 	columnModel: [
 		{header:'${text("单行文本")}', name:'testInput', index:'a.test_input', width:250, align:"left", frozen:true, formatter: function(val, obj, row, act){
-			return '<a href="${ctx}/test/testData/form?id='+row.id+'" class="btnList" data-title="${text("编辑数据")}">'+(val||row.id)+'</a>';
+			return '<a href="${ctx}/test/testData/form?id='+row.id+'&flag=2" class="btnList" data-title="${text("编辑数据")}">'+(val||row.id)+'</a>';
 		}, searchoptions: { dataInit: function (element) {
 			$(element).attr('form', 'searchForm').attr('name', 'testInput2');
 		}}},
@@ -150,7 +150,7 @@ $('#dataGrid').dataGrid({
 			return js.getDictLabel(${@DictUtils.getDictListJson('sys_search_status')}, val, '${text("未知")}', true);
 		}},
 		{header:'${text("创建时间")}', name:'createDate', index:'a.create_date', firstsortorder:'desc', width:150, align:"center"},
-		{header:'${text("备注信息")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
+		{header:'${text("备注")}', name:'remarks', index:'a.remarks', width:150, align:"left"},
 		{header:'${text("操作")}', name:'actions', width:100, formatter: function(val, obj, row, act){
 			var actions = [];
 			//<% if(hasPermi('test:testData:edit')){ %>
