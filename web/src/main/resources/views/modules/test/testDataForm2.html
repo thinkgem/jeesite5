@@ -429,7 +429,7 @@ $("#testDataChildDataGrid").dataGrid({
 		}
 	],
 	onSelectRow: function(id, stat, e) {
-		if (id && !$(e.target).hasClass('btn')){
+		if (id && e && !$(e.target).hasClass('btn')){
 			$('#testDataChildDataGrid').dataGrid('editRow', id,{keys:true,focusField:true});
 		}
 	},
