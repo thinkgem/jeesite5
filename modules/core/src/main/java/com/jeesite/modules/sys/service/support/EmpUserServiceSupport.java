@@ -72,6 +72,13 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	 */
 	@Override
 	public void addDataScopeFilter(EmpUser empUser, String ctrlPermi) {
+//		String defaultRoleCodes = Global.getConfig(
+//				"sys.user.defaultRoleCodes." + empUser.getCurrentUser().getUserType());
+//		if (StringUtils.isNotBlank(defaultRoleCodes)) {
+//			empUser.getCurrentUser().getRoleList().addAll(Arrays
+//					.stream(StringUtils.split(defaultRoleCodes,','))
+//					.map(roleCode -> RoleUtils.get(roleCode)).collect(Collectors.toList()));
+//		}
 		empUser.getSqlMap().getDataScope().addFilter("dsfOffice",
 				"Office", "e.office_code", "a.create_by", ctrlPermi, "office_user");
 		if (StringUtils.isNotBlank(EmpUtils.getCompany().getCompanyCode())){
