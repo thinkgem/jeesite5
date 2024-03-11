@@ -25,7 +25,7 @@ import java.util.Date;
  */
 @Table(name = "${_prefix}cms_article", alias = "a", columns = {
 		@Column(name = "id", attrName = "id", label = "编号", isPK = true),
-		@Column(name = "category_code", attrName = "category.categoryCode", label = "栏目编码"),
+		@Column(name = "category_code", attrName = "category.categoryCode", label = "栏目编码", isQuery = false),
 		@Column(name = "module_type", attrName = "moduleType", label = "模块类型"),
 		@Column(name = "title", attrName = "title", label = "内容标题", queryType = QueryType.LIKE),
 		@Column(name = "href", attrName = "href", label = "外部链接"),
@@ -53,6 +53,7 @@ import java.util.Date;
 	}, joinTable = {
 		@JoinTable(entity = Category.class, alias = "c",
 			on = "c.category_code = a.category_code", columns = {
+				@Column(name = "category_code", isPK = true),
 				@Column(name = "category_name"),
 			}),
 		@JoinTable(entity = Site.class, attrName = "category.site", alias = "s",

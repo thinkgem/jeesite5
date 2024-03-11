@@ -94,6 +94,10 @@ public class ArticleController extends BaseController {
 		if (StringUtils.isBlank(article.getCategory().getSite().getSiteCode())) {
 			article.getCategory().setSite(new Site(Site.getCurrentSiteCode()));
 		}
+		// 查询指定栏目以及下级栏目的文章（如果不需要，可以注释掉）
+		if (StringUtils.isNotBlank(article.getCategory().getCategoryCode())) {
+			article.getCategory().setIsQueryChildren(true);
+		}
 		// 是否查询全部，不过滤权限
 		if (!(isAll != null && isAll)) {
 			articleService.addDataScopeFilter(article);
