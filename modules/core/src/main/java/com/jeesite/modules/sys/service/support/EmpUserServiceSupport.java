@@ -15,17 +15,22 @@ import com.jeesite.common.utils.excel.ExcelImport;
 import com.jeesite.common.validator.ValidatorUtils;
 import com.jeesite.modules.sys.dao.EmpUserDao;
 import com.jeesite.modules.sys.dao.EmployeeOfficeDao;
+import com.jeesite.modules.sys.dao.PostRoleDao;
 import com.jeesite.modules.sys.entity.EmpUser;
 import com.jeesite.modules.sys.entity.Employee;
 import com.jeesite.modules.sys.entity.EmployeeOffice;
 import com.jeesite.modules.sys.entity.User;
+import com.jeesite.modules.sys.service.CompanyService;
 import com.jeesite.modules.sys.service.EmpUserService;
 import com.jeesite.modules.sys.service.EmployeeService;
+import com.jeesite.modules.sys.service.OfficeService;
+import com.jeesite.modules.sys.service.RoleService;
 import com.jeesite.modules.sys.service.UserService;
 import com.jeesite.modules.sys.utils.EmpUtils;
 import com.jeesite.modules.sys.utils.UserUtils;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,11 +47,21 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 	protected final UserService userService;
 	protected final EmployeeService employeeService;
 	protected final EmployeeOfficeDao employeeOfficeDao;
+	protected final ObjectProvider<OfficeService> officeService;
+	protected final ObjectProvider<CompanyService> companyService;
+	protected final PostRoleDao postRoleDao;
+	protected final RoleService roleService;
 
-	public EmpUserServiceSupport(UserService userService, EmployeeService employeeService, EmployeeOfficeDao employeeOfficeDao) {
+	public EmpUserServiceSupport(UserService userService, EmployeeService employeeService,
+			EmployeeOfficeDao employeeOfficeDao, ObjectProvider<OfficeService> officeService,
+			ObjectProvider<CompanyService> companyService, PostRoleDao postRoleDao, RoleService roleService) {
 		this.userService = userService;
 		this.employeeService = employeeService;
 		this.employeeOfficeDao = employeeOfficeDao;
+		this.officeService = officeService;
+		this.companyService = companyService;
+		this.postRoleDao = postRoleDao;
+		this.roleService = roleService;
 	}
 	
 	/**
@@ -91,6 +106,23 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 //				"e.office_code", "a.create_by", ctrlPermi);
 //		sqlMap.getDataScope().addFilterByPermission("dsfOffice", "sys:empUser:view", "User",
 //				"a.user_code", ctrlPermi);
+	}
+
+	/**
+	 * 校验用户是否在当前操作者的数据权限范围内
+	 */
+	@Override
+	public void checkUserDataScope(String userCode, String ctrlPermi) {
+		SysDataScopeCheckHelper.checkUserDataScope(userCode, ctrlPermi, this);
+	}
+
+	/**
+	 * 校验员工用户提交的数据是否在当前操作者的数据权限范围内
+	 */
+	@Override
+	public void checkEmpUserDataScope(EmpUser empUser, String ctrlPermi) {
+		SysDataScopeCheckHelper.checkEmpUserDataScope(empUser, ctrlPermi,
+				this, officeService.getObject(), companyService.getObject(), postRoleDao, roleService);
 	}
 
 	/**

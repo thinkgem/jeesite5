@@ -40,6 +40,20 @@ public interface EmpUserService extends CrudServiceApi<EmpUser> {
 	void addDataScopeFilter(EmpUser empUser, String ctrlPermi);
 
 	/**
+	 * 校验用户是否在当前操作者的数据权限范围内
+	 * @param userCode 用户编码
+	 * @param ctrlPermi 控制权限类型
+	 */
+	void checkUserDataScope(String userCode, String ctrlPermi);
+
+	/**
+	 * 校验员工用户提交的数据是否在当前操作者的数据权限范围内
+	 * @param empUser 员工用户
+	 * @param ctrlPermi 控制权限类型
+	 */
+	void checkEmpUserDataScope(EmpUser empUser, String ctrlPermi);
+
+	/**
 	 * 分页查询数据
 	 */
 	@Override
