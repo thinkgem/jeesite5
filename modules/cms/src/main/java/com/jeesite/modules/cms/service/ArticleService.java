@@ -15,11 +15,13 @@ import com.jeesite.modules.cms.dao.ArticleDao;
 import com.jeesite.modules.cms.dao.ArticleDataDao;
 import com.jeesite.modules.cms.entity.Article;
 import com.jeesite.modules.cms.entity.ArticleData;
+import com.jeesite.modules.cms.entity.Category;
 import com.jeesite.modules.cms.service.extend.ArticleAuthService;
 import com.jeesite.modules.cms.service.extend.ArticleIndexService;
 import com.jeesite.modules.cms.service.extend.ArticleVectorStore;
 import com.jeesite.modules.cms.service.extend.PageCacheService;
 import com.jeesite.modules.cms.utils.CmsUtils;
+import com.jeesite.modules.sys.utils.UserUtils;
 import com.jeesite.modules.file.utils.FileUploadUtils;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -51,16 +53,19 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	protected final ArticleVectorStore articleVectorStore;
 	protected final ArticleAuthService articleAuthService;
 	protected final PageCacheService pageCacheService;
+	protected final CategoryService categoryService;
 
 	// 是否能使用审核功能
 	public static boolean isCanUseAuth;
 
 	public ArticleService(ArticleDataDao articleDataDao,
+						  CategoryService categoryService,
 						  ObjectProvider<ArticleIndexService> articleIndexService,
 						  ObjectProvider<ArticleVectorStore> articleVectorStore,
 						  ObjectProvider<ArticleAuthService> bpmArticleService,
 						  ObjectProvider<PageCacheService> pageCacheService) {
 		this.articleDataDao = articleDataDao;
+		this.categoryService = categoryService;
 		this.articleIndexService = articleIndexService.getIfAvailable();
 		this.articleVectorStore = articleVectorStore.getIfAvailable();
 		this.articleAuthService = bpmArticleService.getIfAvailable();
@@ -163,9 +168,11 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 		if (StringUtils.isNotBlank(article.getCategory().getId())) {
 			article.setCategory(CmsUtils.getCategory(article.getCategory().getId()));
 		}
-		if (StringUtils.isBlank(article.getCategory().getId())) {
+		if (StringUtils.isBlank(article.getCategory().getCategoryCode())) {
 			throw new ServiceException(text("归属栏目不正确或为空。"));
 		}
+		checkSaveDataScope(article);
+		checkPublishPermission(article);
 		// 如果需要文章审核流程，则进行下一步流程操作
 		if (isCanUseAuth && Global.YES.equals(article.getCategory().getIsNeedAudit())) {
 			articleAuthService.submit(article, this::saveArticle);
@@ -176,6 +183,27 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 			if (Article.STATUS_NORMAL.equals(article.getStatus())) {
 				updateStatus(article);
 			}
+		}
+	}
+
+	private void checkSaveDataScope(Article article) {
+		if (article.currentUser().isSuperAdmin()) {
+			return;
+		}
+		Category where = new Category();
+		where.setCategoryCode(article.getCategory().getCategoryCode());
+		where.setSite(article.getCategory().getSite());
+		where.setStatus(Category.STATUS_NORMAL);
+		categoryService.addDataScopeFilter(where, Global.getConfig("user.adminCtrlPermi", "2"));
+		if (categoryService.findCount(where) == 0) {
+			throw new ServiceException(text("没有权限使用该栏目数据！"));
+		}
+	}
+
+	private void checkPublishPermission(Article article) {
+		if (Article.STATUS_NORMAL.equals(article.getStatus())
+				&& !UserUtils.getSubject().isPermitted("cms:article:audit")) {
+			article.setStatus(Article.STATUS_DRAFT);
 		}
 	}
 

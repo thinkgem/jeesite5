@@ -17,6 +17,7 @@ import com.jeesite.modules.sys.entity.Post;
 import com.jeesite.modules.sys.entity.PostRole;
 import com.jeesite.modules.sys.service.EmpUserService;
 import com.jeesite.modules.sys.service.PostService;
+import com.jeesite.modules.sys.service.RoleService;
 import com.jeesite.modules.sys.utils.CorpUtils;
 import com.jeesite.modules.sys.utils.UserUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,10 +34,12 @@ public class PostServiceSupport extends CrudService<PostDao, Post>
 
 	protected final PostRoleDao postRoleDao;
 	protected final EmpUserService empUserService;
+	protected final RoleService roleService;
 
-	public PostServiceSupport(PostRoleDao postRoleDao, EmpUserService empUserService) {
+	public PostServiceSupport(PostRoleDao postRoleDao, EmpUserService empUserService, RoleService roleService) {
 		this.postRoleDao = postRoleDao;
 		this.empUserService = empUserService;
+		this.roleService = roleService;
 	}
 
 	/**
@@ -86,6 +89,7 @@ public class PostServiceSupport extends CrudService<PostDao, Post>
 	@Override
 	@Transactional
 	public void save(Post post) {
+		SysDataScopeCheckHelper.checkRoleDataScope(post.getRoleCodes(), null, roleService);
 		if (post.getIsNewRecord()){
 			// 生成主键，并验证改主键是否存在，如存在则抛出验证信息
 			genIdAndValid(post, post.getViewCode());

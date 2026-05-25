@@ -259,12 +259,14 @@ public class EmpUserServiceSupport extends CrudService<EmpUserDao, EmpUser>
 					// 验证是否存在这个用户
 					User u = UserUtils.getByLoginCode(user.getLoginCode());
 					if (u == null){
+						checkEmpUserDataScope(user, null);
 						this.save(user);
 						userService.saveAuth(user);
 						successNum++;
 						successMsg.append("<br/>" + successNum + "、账号 " + user.getLoginCode() + " 导入成功");
 					} else if (isUpdateSupport){
 						user.setUserCode(u.getUserCode());
+						checkEmpUserDataScope(user, null);
 						this.save(user);
 						userService.saveAuth(user);
 						successNum++;

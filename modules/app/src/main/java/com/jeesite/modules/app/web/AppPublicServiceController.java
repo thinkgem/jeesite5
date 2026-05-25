@@ -58,6 +58,10 @@ public class AppPublicServiceController extends BaseController {
 	@ResponseBody
 	public String commentSave(@Validated AppComment appComment) {
 		appComment.setStatus(AppComment.STATUS_NORMAL);
+		appComment.setReplyDate(null);
+		appComment.setReplyContent(null);
+		appComment.setReplyUserCode(null);
+		appComment.setReplyUserName(null);
 		appCommentService.save(appComment);
 		return renderResult(Global.TRUE, text("我们已收到您的宝贵意见，感谢您的反馈！"));
 	}

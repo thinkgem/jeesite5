@@ -69,8 +69,8 @@ public class SysAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public PostService postService(PostRoleDao postRoleDao, EmpUserService empUserService){
-		return new PostServiceSupport(postRoleDao, empUserService);
+	public PostService postService(PostRoleDao postRoleDao, EmpUserService empUserService, RoleService roleService){
+		return new PostServiceSupport(postRoleDao, empUserService, roleService);
 	}
 
 }
