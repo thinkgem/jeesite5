@@ -11,6 +11,7 @@ import com.jeesite.modules.sys.dao.EmployeePostDao;
 import com.jeesite.modules.sys.dao.PostRoleDao;
 import com.jeesite.modules.sys.service.*;
 import com.jeesite.modules.sys.service.support.*;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -47,8 +48,11 @@ public class SysAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public EmpUserService empUserService(UserService userService, EmployeeService employeeService, EmployeeOfficeDao employeeOfficeDao){
-		return new EmpUserServiceSupport(userService, employeeService, employeeOfficeDao);
+	public EmpUserService empUserService(UserService userService, EmployeeService employeeService,
+										 EmployeeOfficeDao employeeOfficeDao, ObjectProvider<OfficeService> officeService,
+										 ObjectProvider<CompanyService> companyService, PostRoleDao postRoleDao, RoleService roleService){
+		return new EmpUserServiceSupport(userService, employeeService, employeeOfficeDao,
+				officeService, companyService, postRoleDao, roleService);
 	}
 	
 	@Bean
@@ -65,8 +69,8 @@ public class SysAutoConfiguration {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public PostService postService(PostRoleDao postRoleDao, EmpUserService empUserService){
-		return new PostServiceSupport(postRoleDao, empUserService);
+	public PostService postService(PostRoleDao postRoleDao, EmpUserService empUserService, RoleService roleService){
+		return new PostServiceSupport(postRoleDao, empUserService, roleService);
 	}
 
 }

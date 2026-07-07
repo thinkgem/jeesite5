@@ -202,6 +202,7 @@ public class EmpUserController extends BaseController {
 		}
 		Subject subject = UserUtils.getSubject();
 		if (StringUtils.inString(op, Global.OP_ADD, Global.OP_EDIT) && subject.isPermitted("sys:empUser:edit")){
+			empUserService.checkEmpUserDataScope(empUser, Global.getConfig("user.adminCtrlPermi", "2"));
 			empUserService.addFieldScopeFilter(empUser);
 			empUserService.save(empUser);
 		}
@@ -210,6 +211,7 @@ public class EmpUserController extends BaseController {
 				return renderResult(Global.FALSE, text("启用岗位角色权限后，请在用户关联岗位中关联角色", empUser.getUserName()));
 			}
 		}else if (StringUtils.inString(op, Global.OP_ADD, Global.OP_AUTH) && subject.isPermitted("sys:empUser:authRole")){
+			empUserService.checkUserDataScope(empUser.getUserCode(), Global.getConfig("user.adminCtrlPermi", "2"));
 			userService.saveAuth(empUser);
 		}
 		return renderResult(Global.TRUE, text("保存用户''{0}''成功", empUser.getUserName()));
