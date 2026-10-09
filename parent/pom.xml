@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.1.0</version>
+		<version>4.1.1</version>
 		<relativePath />
 	</parent>
 
@@ -22,39 +22,39 @@
 	<properties>
 
 		<!-- Dependencies tools version -->
-		<commons-lang3.version>3.20.0</commons-lang3.version>
-		<commons-text.version>1.14.0</commons-text.version>
+		<commons-lang3.version>3.21.0</commons-lang3.version>
+		<commons-text.version>1.15.0</commons-text.version>
 		<commons-io.version>2.22.0</commons-io.version>
 		<commons-email2.version>2.0.0-M1</commons-email2.version>
 
 		<metadata-extractor.version>2.21.0</metadata-extractor.version>
 		<thumbnailator.version>0.4.21</thumbnailator.version>
-		<twelvemonkeys.version>3.14.0</twelvemonkeys.version>
+		<twelvemonkeys.version>3.15.3</twelvemonkeys.version>
 		<blade-patchca.version>1.1.2</blade-patchca.version>
 		<jmimemagic.version>0.1.5</jmimemagic.version>
 		<zxing.version>3.5.4</zxing.version>
 
 		<poi.version>5.5.1</poi.version>
 		<fory.version>0.16.0</fory.version>
-		<bcprov.version>1.85.2</bcprov.version>
+		<bcprov.version>1.86</bcprov.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
-		<snakeyaml.version>2.6</snakeyaml.version>
-		<fastjson.version>2.0.64</fastjson.version>
+		<snakeyaml.version>2.7</snakeyaml.version>
+		<fastjson.version>2.0.65</fastjson.version>
 		<UserAgentUtils.version>1.21</UserAgentUtils.version>
-		<joda-time.version>2.14.3</joda-time.version>
+		<joda-time.version>2.15.0</joda-time.version>
 
 		<!-- Dependencies framework version -->
 		<mybatis.version>3.5.19</mybatis.version>
 		<mybatis-spring.version>4.1.0</mybatis-spring.version>
 		<jsqlparser.version>4.9</jsqlparser.version>
-		<atomikos.version>6.0.0</atomikos.version>
+		<atomikos.version>6.0.1</atomikos.version>
 		<druid.version>1.2.28</druid.version>
 		<shiro.version>3.0.1</shiro.version>
 		<quartz.version>2.5.2</quartz.version>
-		<swagger3.version>2.2.53</swagger3.version>
+		<swagger3.version>2.2.55</swagger3.version>
 		<liquibase.version>4.31.1</liquibase.version>
 		<logstash-logback.version>8.1</logstash-logback.version>
-		<logback.version>1.6.1</logback.version>
+		<logback.version>1.6.5</logback.version>
 
 		<!-- JDBC driver for your db version -->
 		<!--<mysql.version>9.3.0</mysql.version>-->
