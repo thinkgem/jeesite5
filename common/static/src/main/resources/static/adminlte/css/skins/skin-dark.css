@@ -167,13 +167,13 @@ a, a:hover, a:active, a:focus, .form-unit, th[aria-selected=true] .ui-jqgrid-sor
 /* 页签添加内边距 */
 .content-wrapper, .tabpanel_content, .tabpanel_content .html_content, body {background-color:#000;}
 .box-main, .nav-main, .ui-layout-pane, iframe {border-radius:10px;}
-.tabpanel_content .html_content {padding:12px 14px 12px 15px;}
+.tabpanel_content .html_content {padding:5px 6px 5px 6px;}
 .tabpanel_tab_content {border-bottom:0;}
 .ui-layout-resizer {background:none;}
 .content {padding:0!important}
 
 /* 页签-无界风格 */
-.tabpanel_mover li {height:26px;padding:2px 16px 2px 3px;margin:11px 0 0px 9px;border:0;border-radius:7px;background:#1a1a1a;}
+.tabpanel_mover li {height:26px;padding:2px 16px 2px 3px;margin:7px 6px 0 1px;border:0;border-radius:7px;background:#1a1a1a;}
 .tabpanel_mover li .title {padding-left:0;text-align:center;color:#ddd;}
 .tabpanel_mover li.active {background-color:#2975bc;}
 .tabpanel_mover li.active div {color:#fff;}
@@ -183,7 +183,7 @@ a, a:hover, a:active, a:focus, .form-unit, th[aria-selected=true] .ui-jqgrid-sor
      -o-transform:scale(1.2);-ms-transform:scale(1.2);transform:scale(1.2);color:#d30606;}
 .tabpanel_mover li.active .closer:hover {color:#fff;opacity:0.9;}
 .tabpanel_tab_content {background-color:transparent;border-bottom-color:#eeeeee;overflow:visible;}
-.tabpanel_tab_content .tabpanel_left_scroll, .tabpanel_tab_content .tabpanel_right_scroll {top:12px;}
+.tabpanel_tab_content .tabpanel_left_scroll, .tabpanel_tab_content .tabpanel_right_scroll {top:8px;}
 .tabpanel_tab_content .tabpanel_mover {margin:0 5px;}
 
 /* 页签-下划线风格

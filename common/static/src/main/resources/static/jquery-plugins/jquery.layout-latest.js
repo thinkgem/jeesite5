@@ -815,25 +815,25 @@ $.layout.defaults = {
 ,	north: {
 		paneSelector:			".ui-layout-north"
 	,	size:					"auto"		// eg: "auto", "30%", .30, 200
-	,	resizerCursor:			"n-resize"	// custom = url(myCursor.cur)
+	,	resizerCursor:			"row-resize"	// custom = url(myCursor.cur)
 	,	customHotkey:			""			// EITHER a charCode (43) OR a character ("o")
 	}
 ,	south: {
 		paneSelector:			".ui-layout-south"
 	,	size:					"auto"
-	,	resizerCursor:			"s-resize"
+	,	resizerCursor:			"row-resize"
 	,	customHotkey:			""
 	}
 ,	east: {
 		paneSelector:			".ui-layout-east"
 	,	size:					200
-	,	resizerCursor:			"e-resize"
+	,	resizerCursor:			"col-resize"
 	,	customHotkey:			""
 	}
 ,	west: {
 		paneSelector:			".ui-layout-west"
 	,	size:					200
-	,	resizerCursor:			"w-resize"
+	,	resizerCursor:			"col-resize"
 	,	customHotkey:			""
 	}
 ,	center: {
@@ -1521,9 +1521,9 @@ $.fn.layout = function (opts) {
 			if (el.length == 0) {
 				el = $parent('.jeesite-layout-content');
 			}
-			top = el.css('padding-top');
+			top = el.css('padding-left');
 		}else{
-			top = $('.main-content').css('padding-top');
+			top = $('.main-content').css('padding-left');
 		}
 		if (top && top != '' && top != '0px') {
 			top = parseInt(top.replace('px', ''));
@@ -4581,7 +4581,7 @@ $.fn.layout = function (opts) {
 						width:	width  // account for borders & padding
 					,	height:	cssH($T, spacing) // ditto
 					,	left:	offset // TODO: VERIFY that toggler  positions correctly for ALL values
-					,	top:	0
+					,	top:	-2 // ThinkGem
 					});
 					// CENTER the toggler content SPAN
 //					$T.children(".content").each(function(){

@@ -7,7 +7,7 @@
 
 .tabpanel_tab_content {
 	width: 100%;
-	height: 38px;
+	height: 35px;
 	line-height: 21px;
 	background-color: #F9F9F9;
 	border-bottom: 1px solid #e5e5e5;
@@ -37,7 +37,7 @@
 .tabpanel_mover li {
 	width: 105px;
 	/*line-height: 20px;*/
-	padding: 9px 16px 9px 5px;
+	padding: 7px 16px 7px 5px;
 	background-color: #f4f6f8;
 	float: left;
 	position: relative;
@@ -55,7 +55,7 @@
 	background: transparent url(../image/tab-close.png) no-repeat;
 	position: absolute;
 	right: 5px;
-	top: 14px;
+	top: 12px;
 	width: 11px;
 	height: 11px;
 	cursor: pointer;
@@ -110,7 +110,7 @@
 	width: 18px;
 	height: 24px;
 	left: 0px;
-	top: 8px;
+	top: 5px;
 	cursor: pointer;
 	z-index: 10;
 }
@@ -121,7 +121,7 @@
 	width: 18px;
 	height: 24px;
 	right: 0px;
-	top: 8px;
+	top: 5px;
 	cursor: pointer;
 	z-index: 10;
 }
