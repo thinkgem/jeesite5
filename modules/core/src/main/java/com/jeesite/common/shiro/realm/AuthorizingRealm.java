@@ -76,11 +76,14 @@ public class AuthorizingRealm extends BaseAuthorizingRealm  {
 	public String encryptPassword(String plainPassword) {
 		String plain = EncodeUtils.decodeHtml(plainPassword);
 		String salt = SM3Utils.genSaltString(SALT_SIZE);
+		// 如果使用国密算法，在 yml 设置参数即可：encrypt.smAlgorithm: true
 		if (Global.isSmAlgorithm()) {
 			String data = SM3Utils.sm3(plain, salt, HASH_ITERATIONS);
 			return salt + data;
 		}
+		// 密码默认使用 sha-1，对于安全级别要求较高的，可以更改为 sha-256
 		String data = ShaUtils.sha1(plain, salt, HASH_ITERATIONS);
+		// String data = ShaUtils.sha256(plain, salt, HASH_ITERATIONS);
 		return salt + data;
 	}
 
@@ -95,11 +98,14 @@ public class AuthorizingRealm extends BaseAuthorizingRealm  {
 		try{
 			String plain = EncodeUtils.decodeHtml(plainPassword);
 			String salt = password.substring(0, SALT_SIZE * 2);
+			// 如果使用国密算法，在 yml 设置参数即可：encrypt.smAlgorithm: true
 			if (Global.isSmAlgorithm()) {
 				String data = SM3Utils.sm3(plain, salt, HASH_ITERATIONS);
 				return password.equals(salt + data);
 			}
+			// 密码默认使用 sha-1，对于安全级别要求较高的，可以更改为 sha-256
 			String data = ShaUtils.sha1(plain, salt, HASH_ITERATIONS);
+			//String data = ShaUtils.sha256(plain, salt, HASH_ITERATIONS);
 			return password.equals(salt + data);
 		}catch(Exception e){
 			return false;
