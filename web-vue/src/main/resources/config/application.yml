@@ -450,8 +450,11 @@ user:
   # 多租户模式（SAAS模式）（专业版）
   useCorpModel: false
   
-#  # 登录账号是否租户内唯一，否则全局唯一
+#  # 登录账号是否租户内唯一，否则全局唯一，为 true 时，登录页显示租户选择框
 #  loginCodeCorpUnique: false
+#  
+#  # 登录账号查询时是否忽略大小写，一般由数据库 “排序规则” 确定，该选项为强制upper，v5.20.0+ 默认为 false，之前版本默认 true
+#  loginCodeIgnoreCase: false
 #
 #  # 是否启用验证码登录（手机、邮箱）
 #  loginByValidCode: true

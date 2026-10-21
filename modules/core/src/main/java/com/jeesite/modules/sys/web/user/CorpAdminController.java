@@ -64,7 +64,7 @@ public class CorpAdminController extends BaseController {
 		model.addAttribute("user", user);
 		model.addAttribute("currentCorpCode", user.currentUser().getCorpCode_());
 		model.addAttribute("currentCorpName", user.currentUser().getCorpName_());
-		model.addAttribute("useCorpModel", Global.getConfigToBoolean("user.useCorpModel", "false"));
+		model.addAttribute("useCorpModel", Global.isUseCorpModel());
 		return "modules/sys/user/corpAdminList";
 	}
 
@@ -102,7 +102,7 @@ public class CorpAdminController extends BaseController {
 		// 操作类型：addCorp: 添加租户； addAdmin: 添加管理员； edit: 编辑
 		model.addAttribute("op", op);
 		model.addAttribute("user", user);
-		model.addAttribute("useCorpModel", Global.getConfigToBoolean("user.useCorpModel", "false"));
+		model.addAttribute("useCorpModel", Global.isUseCorpModel());
 		return "modules/sys/user/corpAdminForm";
 	}
 
