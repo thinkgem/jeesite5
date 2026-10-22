@@ -22,6 +22,7 @@ public class AesUtilsTest {
 	private static final byte[] DEFAULT_KEY = EncodeUtils.decodeHex("9f58a20946b47e190003ec716c1c457d");
 
 	public static void main(String[] args) throws Exception {
+//		System.setProperty("encrypt.storeBase64", "true");
 
 		String s = S;
 		System.out.println("原文：" + s);

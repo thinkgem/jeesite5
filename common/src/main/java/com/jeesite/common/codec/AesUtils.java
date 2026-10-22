@@ -122,6 +122,16 @@ public class AesUtils {
 	public static String encode(String input) {
 		return encodeToStore(encode(input.getBytes(StandardCharsets.UTF_8), DEFAULT_KEY));
 	}
+
+	/**
+	 * 使用 AES 加密原始字符串
+	 * @param input 原始输入字符串
+	 * @param key 符合要求的密钥
+	 * @author ThinkGem
+	 */
+	public static String encode(String input, String key) {
+		return encodeToStore(encode(input.getBytes(StandardCharsets.UTF_8), EncodeUtils.decodeHex(key)));
+	}
 	
 	/**
 	 * 使用 AES 加密原始字符串
@@ -135,16 +145,6 @@ public class AesUtils {
 
 	/**
 	 * 使用 AES 加密原始字符串
-	 * @param input 原始输入字符串
-	 * @param key 符合要求的密钥
-	 * @author ThinkGem
-	 */
-	public static String encode(String input, String key) {
-		return encodeToStore(encode(input.getBytes(StandardCharsets.UTF_8), EncodeUtils.decodeHex(key)));
-	}
-
-	/**
-	 * 使用 AES 加密原始字符串
 	 * @param input 原始输入字符数组
 	 * @param key 符合要求的密钥
 	 * @param iv 初始向量
@@ -152,23 +152,6 @@ public class AesUtils {
 	 */
 	public static byte[] encode(byte[] input, byte[] key, byte[] iv) {
 		return aes(input, key, AES_CBC, iv, Cipher.ENCRYPT_MODE);
-	}
-
-	/**
-	 * 旧版加密：AES/CBC/PKCS5Padding，随机初始向量，初始向量存放在密文的前 16 字节
-	 * <p>仅供单元测试及历史数据兼容性验证使用（验证旧版密文能否正常解密），
-	 * 新数据加密请使用 {@link #encode(byte[], byte[])} 方法。</p>
-	 * @param input 原始输入字符数组
-	 * @param key 符合要求的密钥
-	 * @author ThinkGem
-	 */
-	public static byte[] encodeLegacy(byte[] input, byte[] key) {
-		byte[] iv = genIV();
-		byte[] data = encode(input, key, iv);
-		byte[] output = new byte[iv.length + data.length];
-		System.arraycopy(iv, 0, output, 0, iv.length);
-		System.arraycopy(data, 0, output, iv.length, data.length);
-		return output;
 	}
 
 	/**
@@ -195,6 +178,35 @@ public class AesUtils {
 	/**
 	 * 旧版加密：AES/CBC/PKCS5Padding，指定初始向量，初始向量不存放在密文中
 	 * <p>无初始向量的历史数据，初始向量可传入全 0 的 16 字节，或密钥的前 16 字节；
+	 * 仅供单元测试及历史数据兼容性验证使用，新数据加密请使用 {@link #encode(String)} 方法。</p>
+	 * @param input 原始输入字符串
+	 * @param iv 初始向量，长度必须为 16 字节
+	 * @author ThinkGem
+	 */
+	public static String encodeLegacy(String input, byte[] iv) {
+		return encodeToStore(encodeLegacy(input.getBytes(StandardCharsets.UTF_8), DEFAULT_KEY, iv));
+	}
+
+	/**
+	 * 旧版加密：AES/CBC/PKCS5Padding，随机初始向量，初始向量存放在密文的前 16 字节
+	 * <p>仅供单元测试及历史数据兼容性验证使用（验证旧版密文能否正常解密），
+	 * 新数据加密请使用 {@link #encode(byte[], byte[])} 方法。</p>
+	 * @param input 原始输入字符数组
+	 * @param key 符合要求的密钥
+	 * @author ThinkGem
+	 */
+	public static byte[] encodeLegacy(byte[] input, byte[] key) {
+		byte[] iv = genIV();
+		byte[] data = encode(input, key, iv);
+		byte[] output = new byte[iv.length + data.length];
+		System.arraycopy(iv, 0, output, 0, iv.length);
+		System.arraycopy(data, 0, output, iv.length, data.length);
+		return output;
+	}
+
+	/**
+	 * 旧版加密：AES/CBC/PKCS5Padding，指定初始向量，初始向量不存放在密文中
+	 * <p>无初始向量的历史数据，初始向量可传入全 0 的 16 字节，或密钥的前 16 字节；
 	 * 仅供单元测试及历史数据兼容性验证使用，新数据加密请使用 {@link #encode(byte[], byte[])} 方法。</p>
 	 * @param input 原始输入字符数组
 	 * @param key 符合要求的密钥
@@ -206,24 +218,22 @@ public class AesUtils {
 	}
 
 	/**
-	 * 旧版加密：AES/CBC/PKCS5Padding，指定初始向量，初始向量不存放在密文中
-	 * <p>无初始向量的历史数据，初始向量可传入全 0 的 16 字节，或密钥的前 16 字节；
-	 * 仅供单元测试及历史数据兼容性验证使用，新数据加密请使用 {@link #encode(String)} 方法。</p>
-	 * @param input 原始输入字符串
-	 * @param iv 初始向量，长度必须为 16 字节
-	 * @author ThinkGem
-	 */
-	public static String encodeLegacy(String input, byte[] iv) {
-		return encodeToStore(encodeLegacy(input.getBytes(StandardCharsets.UTF_8), DEFAULT_KEY, iv));
-	}
-
-	/**
 	 * 使用 AES 解密数据, 返回原始字符串
 	 * @param input Hex 或 Base64 编码的加密字符串
 	 * @author ThinkGem
 	 */
 	public static String decode(String input) {
 		return new String(decodeImpl(decodeFromStore(input), DEFAULT_KEY, true), StandardCharsets.UTF_8);
+	}
+
+	/**
+	 * 使用 AES 解密数据, 返回原始字符串
+	 * @param input Hex 或 Base64 编码的加密字符串
+	 * @param key 符合要求的密钥
+	 * @author ThinkGem
+	 */
+	public static String decode(String input, String key) {
+		return new String(decodeImpl(decodeFromStore(input), EncodeUtils.decodeHex(key), true), StandardCharsets.UTF_8);
 	}
 	
 	/**
@@ -236,16 +246,6 @@ public class AesUtils {
 	 */
 	public static byte[] decode(byte[] input, byte[] key) {
 		return decodeImpl(input, key, false);
-	}
-
-	/**
-	 * 使用 AES 解密数据, 返回原始字符串
-	 * @param input Hex 或 Base64 编码的加密字符串
-	 * @param key 符合要求的密钥
-	 * @author ThinkGem
-	 */
-	public static String decode(String input, String key) {
-		return new String(decodeImpl(decodeFromStore(input), EncodeUtils.decodeHex(key), true), StandardCharsets.UTF_8);
 	}
 
 	/**

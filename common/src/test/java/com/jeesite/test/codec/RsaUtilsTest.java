@@ -21,6 +21,7 @@ public class RsaUtilsTest {
 	private static final String S = "Hello word! 你好，中文！";
 
 	public static void main(String[] args) {
+//		System.setProperty("encrypt.storeBase64", "true");
 
 		String s = S;
 		System.out.println("原文：" + s);

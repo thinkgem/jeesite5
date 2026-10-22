@@ -101,6 +101,14 @@ public class RsaUtils {
 
 	/**
 	 * 公钥加密
+	 * @author ThinkGem
+	 */
+	public static String encode(String input, PublicKey publicKey) {
+		return encodeToStore(encode(input.getBytes(StandardCharsets.UTF_8), publicKey));
+	}
+
+	/**
+	 * 公钥加密
 	 * <p>使用安全的 OAEP 填充方式（SHA-256 摘要 + MGF1），单次可加密的明文长度受密钥长度限制，
 	 * 2048 位密钥约为 190 字节，超出请改用对称加密或分段加密。</p>
 	 * @author ThinkGem
@@ -117,11 +125,41 @@ public class RsaUtils {
 	}
 
 	/**
-	 * 公钥加密
+	 * 兼容旧版本数据：使用 PKCS#1 v1.5 填充方式加密（旧版本所使用的填充方式）
+	 * <p>仅供单元测试及历史数据兼容性验证使用，新数据加密请使用 {@link #encode(String, PublicKey)} 方法。</p>
+	 * @param input 原始输入字符串
+	 * @param publicKey 符合要求的公钥
 	 * @author ThinkGem
 	 */
-	public static String encode(String input, PublicKey publicKey) {
-		return encodeToStore(encode(input.getBytes(StandardCharsets.UTF_8), publicKey));
+	public static String encodeLegacy(String input, PublicKey publicKey) {
+		return encodeToStore(encodeLegacy(input.getBytes(StandardCharsets.UTF_8), publicKey));
+	}
+
+	/**
+	 * 兼容旧版本数据：使用 PKCS#1 v1.5 填充方式加密（旧版本所使用的填充方式）
+	 * <p>仅供单元测试及历史数据兼容性验证使用（验证旧版密文能否正常解密），
+	 * 不再用于业务数据加密，新数据加密请使用 {@link #encode(byte[], PublicKey)} 方法（OAEP 填充方式）。</p>
+	 * @param input 原始输入字符数组
+	 * @param publicKey 符合要求的公钥
+	 * @author ThinkGem
+	 */
+	public static byte[] encodeLegacy(byte[] input, PublicKey publicKey) {
+		try {
+			Cipher encryptCipher = Cipher.getInstance(RSA_LEGACY);
+			encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey);
+			return encryptCipher.doFinal(input);
+		} catch (InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException |
+				 NoSuchAlgorithmException | BadPaddingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 私钥解密
+	 * @author ThinkGem
+	 */
+	public static String decode(String input, PrivateKey privateKey) {
+		return new String(decode(decodeFromStore(input), privateKey), StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -181,41 +219,11 @@ public class RsaUtils {
 	}
 
 	/**
-	 * 兼容旧版本数据：使用 PKCS#1 v1.5 填充方式加密（旧版本所使用的填充方式）
-	 * <p>仅供单元测试及历史数据兼容性验证使用（验证旧版密文能否正常解密），
-	 * 不再用于业务数据加密，新数据加密请使用 {@link #encode(byte[], PublicKey)} 方法（OAEP 填充方式）。</p>
-	 * @param input 原始输入字符数组
-	 * @param publicKey 符合要求的公钥
+	 * 私钥签名
 	 * @author ThinkGem
 	 */
-	public static byte[] encodeLegacy(byte[] input, PublicKey publicKey) {
-		try {
-			Cipher encryptCipher = Cipher.getInstance(RSA_LEGACY);
-			encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey);
-			return encryptCipher.doFinal(input);
-		} catch (InvalidKeyException | NoSuchPaddingException | IllegalBlockSizeException |
-				 NoSuchAlgorithmException | BadPaddingException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * 兼容旧版本数据：使用 PKCS#1 v1.5 填充方式加密（旧版本所使用的填充方式）
-	 * <p>仅供单元测试及历史数据兼容性验证使用，新数据加密请使用 {@link #encode(String, PublicKey)} 方法。</p>
-	 * @param input 原始输入字符串
-	 * @param publicKey 符合要求的公钥
-	 * @author ThinkGem
-	 */
-	public static String encodeLegacy(String input, PublicKey publicKey) {
-		return encodeToStore(encodeLegacy(input.getBytes(StandardCharsets.UTF_8), publicKey));
-	}
-
-	/**
-	 * 私钥解密
-	 * @author ThinkGem
-	 */
-	public static String decode(String input, PrivateKey privateKey) {
-		return new String(decode(decodeFromStore(input), privateKey), StandardCharsets.UTF_8);
+	public static String sign(String input, PrivateKey privateKey) {
+		return encodeToStore(sign(input.getBytes(StandardCharsets.UTF_8), privateKey));
 	}
 
 	/**
@@ -234,11 +242,11 @@ public class RsaUtils {
 	}
 
 	/**
-	 * 私钥签名
+	 * 公钥验签
 	 * @author ThinkGem
 	 */
-	public static String sign(String input, PrivateKey privateKey) {
-		return encodeToStore(sign(input.getBytes(StandardCharsets.UTF_8), privateKey));
+	public static boolean verify(String input, PublicKey publicKey, String signature) {
+		return verify(input.getBytes(StandardCharsets.UTF_8), publicKey, decodeFromStore(signature));
 	}
 
 	/**
@@ -254,14 +262,6 @@ public class RsaUtils {
 		} catch (NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	/**
-	 * 公钥验签
-	 * @author ThinkGem
-	 */
-	public static boolean verify(String input, PublicKey publicKey, String signature) {
-		return verify(input.getBytes(StandardCharsets.UTF_8), publicKey, decodeFromStore(signature));
 	}
 
 	/**
