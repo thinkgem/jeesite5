@@ -839,6 +839,9 @@ file:
   #imageThumbConfig: 150x150,300x300
   #imageThumbFormat: jpg
   
+  # 是否使用 UUID 生成主键，避免人工猜测  v5.20.0
+  pkUseUuid: true
+  
   # 是否启用秒传
   checkmd5: true
   # 是否开启分片上传
