@@ -211,6 +211,20 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	public static boolean endsWithIgnoreCase(final CharSequence str, final CharSequence suffix) {
 		return Strings.CI.endsWith(str, suffix);
 	}
+	
+	/**
+	 * 移除前缀字符串
+	 */
+    public static String removeStart(final String str, final String remove) {
+        return Strings.CS.removeStart(str, remove);
+    }
+	
+	/**
+	 * 移除前缀字符串（忽略大小写）
+	 */
+    public static String removeStartIgnoreCase(final String str, final String remove) {
+        return Strings.CI.removeStart(str, remove);
+    }
 
 	/**
 	 * 替换字符串
