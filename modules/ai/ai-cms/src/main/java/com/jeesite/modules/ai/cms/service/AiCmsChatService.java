@@ -112,6 +112,7 @@ public class AiCmsChatService extends BaseService {
 		if (StringUtils.isBlank(conversationId)) {
 			return List.of();
 		}
+		checkConversationPermi(conversationId);
         return chatMemory.get(conversationId);
 	}
 
@@ -135,9 +136,7 @@ public class AiCmsChatService extends BaseService {
 		if (StringUtils.isBlank(conversationId)) {
 			conversationId = CacheChatMemoryRepository.genUserConversationId();
 		}
-		if (CacheChatMemoryRepository.checkPermiByConversationId(conversationId)){
-			throw new ServiceException("越权操作！");
-		}
+		checkConversationPermi(conversationId);
 		if (StringUtils.isBlank(title)) {
 			title = "新对话 " + DateUtils.getTime();
 		}
@@ -151,13 +150,20 @@ public class AiCmsChatService extends BaseService {
 	}
 
 	/**
+	 * 保存上传图片与聊天会话的关系（先校验会话归属，供后端多模态识图读取、以及切换会话时回显）
+	 * @author ThinkGem
+	 */
+	public void saveChatFile(String conversationId, String fileUploadIds, String delFileUploadIds) {
+		checkConversationPermi(conversationId);
+		FileUploadUtils.saveFileUpload(conversationId, BIZ_TYPE_CHAT, fileUploadIds, delFileUploadIds);
+	}
+
+	/**
 	 * 删除聊天对话
 	 * @author ThinkGem
 	 */
 	public void deleteChatConversation(String conversationId) {
-		if (CacheChatMemoryRepository.checkPermiByConversationId(conversationId)){
-			throw new ServiceException("越权操作！");
-		}
+		checkConversationPermi(conversationId);
 		Map<String, Map<String, Object>> cache = getChatCacheMap();
 		cache.remove(conversationId);
 		CacheUtils.put(CMS_CHAT_CACHE, getChatCacheKey(), cache);
@@ -169,9 +175,7 @@ public class AiCmsChatService extends BaseService {
 	 * @author ThinkGem
 	 */
 	public Flux<ChatResponse> chatStream(String conversationId, String message, HttpServletRequest request) {
-		if (CacheChatMemoryRepository.checkPermiByConversationId(conversationId)){
-			throw new ServiceException("越权操作！");
-		}
+		checkConversationPermi(conversationId);
 		String text = StringUtils.replaceEach(message, USER_MESSAGE_SEARCH, USER_MESSAGE_REPLACE);
 		List<Media> media = ListUtils.newArrayList();
 		// 识图：将对话上传的图片文件转换为多模态消息（注意：chat.model 需设置为多模态模型，如 qwen-vl-plus、gpt-4o）
@@ -275,6 +279,17 @@ public class AiCmsChatService extends BaseService {
 						.build());
 			})
 			.contextWrite(AiToolContextProvider.contextWrite());
+	}
+
+	/**
+	 * 校验会话归属：会话 ID 必须属于当前登录用户，否则抛出越权异常。
+	 * 所有以会话 ID 为入参的方法，都必须先经过此校验。
+	 * @author ThinkGem
+	 */
+	public static void checkConversationPermi(String conversationId) {
+		if (CacheChatMemoryRepository.checkPermiByConversationId(conversationId)) {
+			throw new ServiceException("越权操作！");
+		}
 	}
 
 	/**

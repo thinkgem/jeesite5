@@ -54,11 +54,16 @@ public class CacheChatMemoryRepository implements ChatMemoryRepository {
 	}
 
 	/**
-	 * 检查用户维度的复合缓存键权限
+	 * 检查用户维度的复合缓存键权限。
+	 * 返回 true 表示「无权访问」，即该会话不属于当前登录用户（含会话 ID 或用户为空的情况）。
+	 * 会话 ID 的格式为：用户编码 + ":" + 雪花 ID（见 {@link #genUserConversationId()}）。
 	 */
 	public static boolean checkPermiByConversationId(String conversationId) {
 		String userCode = UserUtils.getUser().getId();
-		return StringUtils.startsWith(userCode + ":", conversationId);
+		if (StringUtils.isBlank(conversationId) || StringUtils.isBlank(userCode)) {
+			return true;
+		}
+		return !StringUtils.startsWith(conversationId, userCode + ":");
 	}
 
 	@Override

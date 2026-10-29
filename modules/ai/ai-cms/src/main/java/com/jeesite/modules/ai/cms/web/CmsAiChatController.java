@@ -8,7 +8,6 @@ import com.jeesite.common.config.Global;
 import com.jeesite.common.web.BaseController;
 import com.jeesite.modules.ai.cms.entity.AiChatCompletion;
 import com.jeesite.modules.ai.cms.service.AiCmsChatService;
-import com.jeesite.modules.file.utils.FileUploadUtils;
 import com.jeesite.modules.sys.entity.Area;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.ai.chat.messages.Message;
@@ -84,7 +83,7 @@ public class CmsAiChatController extends BaseController {
 	 */
 	@RequestMapping("file/save")
 	public String fileSave(@RequestParam String id, String fileUploadIds, String delFileUploadIds) {
-		FileUploadUtils.saveFileUpload(id, AiCmsChatService.BIZ_TYPE_CHAT, fileUploadIds, delFileUploadIds);
+		aiCmsChatService.saveChatFile(id, fileUploadIds, delFileUploadIds);
 		return renderResult(Global.TRUE, "保存成功", id);
 	}
 
