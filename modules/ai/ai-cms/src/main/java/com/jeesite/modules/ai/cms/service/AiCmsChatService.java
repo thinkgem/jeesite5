@@ -287,7 +287,7 @@ public class AiCmsChatService extends BaseService {
 	 * @author ThinkGem
 	 */
 	public static void checkConversationPermi(String conversationId) {
-		if (CacheChatMemoryRepository.checkPermiByConversationId(conversationId)) {
+		if (!CacheChatMemoryRepository.checkPermiByConversationId(conversationId)) {
 			throw new ServiceException("越权操作！");
 		}
 	}
@@ -350,7 +350,7 @@ public class AiCmsChatService extends BaseService {
 	 */
 	public List<Area> chatArea(String message) {
 		Area where = new Area();
-		where.setPage(new Page<>(1, 5, Page.COUNT_NOT_COUNT));
+		where.setPage(new Page<>(1, 1, Page.COUNT_NOT_COUNT));
 		List<Area> list = SpringUtils.getBean(AreaService.class).findList(where);
 		ChatClient.ChatClientRequestSpec spec = chatClient.prompt()
 			.messages(
